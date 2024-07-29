@@ -4,10 +4,30 @@
 \alias{lsirm1pl_normal_mar}
 \title{1PL LSIRM with normal likelihood for missing at random data.}
 \usage{
-lsirm1pl_normal_mar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                    jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
-                    pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_mean_gamma = 0.5, pr_sd_gamma =1.0,
-                    pr_a_theta = 0.001, pr_b_theta = 0.001, pr_a_eps = 0.001, pr_b_eps = 0.001, missing.val = 99, verbose=FALSE)
+lsirm1pl_normal_mar(
+  data,
+  ndim = 2,
+  niter = 15000,
+  nburn = 2500,
+  nthin = 5,
+  nprint = 500,
+  jump_beta = 0.4,
+  jump_theta = 1,
+  jump_gamma = 1,
+  jump_z = 0.5,
+  jump_w = 0.5,
+  pr_mean_beta = 0,
+  pr_sd_beta = 1,
+  pr_mean_theta = 0,
+  pr_mean_gamma = 0.5,
+  pr_sd_gamma = 1,
+  pr_a_theta = 0.001,
+  pr_b_theta = 0.001,
+  pr_a_eps = 0.001,
+  pr_b_eps = 0.001,
+  missing.val = 99,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{Matrix; a binary or continuous item response matrix for analysis. Each row represents a respondent, and each column contains responses to the corresponding item.}
@@ -48,11 +68,11 @@ lsirm1pl_normal_mar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, npri
 
 \item{pr_a_eps}{Numeric; the shape parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
-\item{pr_b_eps}{Numeric; the scale parameter of inverse gamma prior for variance of data likelihood Default is 0.001.}
+\item{pr_b_eps}{Numeric; the scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
 \item{missing.val}{Numeric; a number to replace missing values. Default is 99.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE.}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm1pl_normal_mar} returns an object of  list containing the following components:

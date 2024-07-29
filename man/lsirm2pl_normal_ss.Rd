@@ -54,6 +54,8 @@ lsirm2pl_normal_ss(
 
 \item{jump_alpha}{Numeric; the jumping rule for the alpha proposal density. Default is 1.0.}
 
+\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
 \item{jump_w}{Numeric; the jumping rule for the w proposal density. Default is 0.5.}
@@ -76,23 +78,23 @@ lsirm2pl_normal_ss(
 
 \item{pr_sd_alpha}{Numeric; the standard deviation of the log normal prior for alpha. Default is 1.0.}
 
-\item{pr_a_eps}{Numeric; shape parameter of inverse gamma prior for variance of data likelihood. default value is 0.001.}
+\item{pr_a_eps}{Numeric; shape parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
-\item{pr_b_eps}{Numeric; scale parameter of inverse gamma prior for variance of data likelihood default value is 0.001.}
+\item{pr_b_eps}{Numeric; scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
 \item{pr_a_theta}{Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
-\item{pr_xi_a}{Numeric; first shape parameter of beta prior for latent variable xi. default value is 1.}
+\item{pr_xi_a}{Numeric; first shape parameter of beta prior for latent variable xi. Default is 1.}
 
-\item{pr_xi_b}{Numeric; second shape parameter of beta prior for latent variable xi. default value is 1.}
+\item{pr_xi_b}{Numeric; second shape parameter of beta prior for latent variable xi. Default is 1.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_normal_ss} returns an object of  list containing the following components:
- \item{data}{data frame or matrix containing the variables in the model.}
+ \item{data}{Data frame or matrix containing the variables in the model.}
  \item{bic}{Numeric value with the corresponding BIC.}
  \item{mcmc_inf}{number of mcmc iteration, burn-in periods, and thinning intervals.}
  \item{map_inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
@@ -101,7 +103,6 @@ lsirm2pl_normal_ss(
  \item{sigma_theta_estimate}{posterior estimation of standard deviation of theta.}
  \item{sigma_estimate}{posterior estimation of standard deviation.}
  \item{gamma_estimate}{posterior estimation of gamma.}
- \item{alpha_estimate}{posterior estimation of alpha.}
  \item{z_estimate}{posterior estimation of z.}
  \item{w_estimate}{posterior estimation of w.}
  \item{pi_estimate}{posterior estimation of phi. inclusion probability of gamma. if estimation of phi is less than 0.5, choose Rasch model with gamma = 0, otherwise latent space model with gamma > 0. }
@@ -110,7 +111,6 @@ lsirm2pl_normal_ss(
  \item{theta_sd}{posterior samples of standard deviation of theta.}
  \item{sigma}{posterior samples of standard deviation.}
  \item{gamma}{posterior samples of gamma.}
- \item{alpha}{posterior samples of alpha.}
  \item{z}{posterior samples of z. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
  \item{w}{posterior samples of w. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
  \item{pi}{posterior samples of phi which is indicator of spike and slab prior. If phi is 1, log gamma follows the slab prior, otherwise follows the spike prior. }
@@ -119,7 +119,9 @@ lsirm2pl_normal_ss(
  \item{accept_w}{accept ratio of w.}
  \item{accept_z}{accept ratio of z.}
  \item{accept_gamma}{accept ratio of gamma.}
- \item{accept_alpha}{accept ratio of alpha.}
+ \item{alpha_estimate}{Posterior estimates of the alpha parameter.}
+ \item{alpha}{Posterior estimates of the alpha parameter.}
+ \item{accept_alpha}{Acceptance ratio for the alpha parameter.}
 }
 \description{
 \link{lsirm2pl_normal_ss} is used to fit 2PL LSIRM for continuous variable with model selection approach.

@@ -4,13 +4,34 @@
 \alias{lsirm1pl_normal_mar_ss}
 \title{1PL LSIRM with normal likelihood and model selection approach for missing at random data.}
 \usage{
-lsirm1pl_normal_mar_ss(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                       jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
-                       pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0,
-                       pr_spike_mean = -3, pr_spike_sd = 1.0, pr_slab_mean = 0.5, pr_slab_sd = 1.0,
-                       pr_a_theta = 0.001, pr_b_theta = 0.001,
-                       pr_a_eps = 0.001, pr_b_eps = 0.001,
-                       pr_xi_a = 0.001, pr_xi_b = 0.001, missing.val = 99, verbose=FALSE)
+lsirm1pl_normal_mar_ss(
+  data,
+  ndim = 2,
+  niter = 15000,
+  nburn = 2500,
+  nthin = 5,
+  nprint = 500,
+  jump_beta = 0.4,
+  jump_theta = 1,
+  jump_gamma = 1,
+  jump_z = 0.5,
+  jump_w = 0.5,
+  pr_mean_beta = 0,
+  pr_sd_beta = 1,
+  pr_mean_theta = 0,
+  pr_spike_mean = -3,
+  pr_spike_sd = 1,
+  pr_slab_mean = 0.5,
+  pr_slab_sd = 1,
+  pr_a_theta = 0.001,
+  pr_b_theta = 0.001,
+  pr_a_eps = 0.001,
+  pr_b_eps = 0.001,
+  pr_xi_a = 0.001,
+  pr_xi_b = 0.001,
+  missing.val = 99,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{Matrix; a binary or continuous item response matrix for analysis. Each row represents a respondent, and each column contains responses to the corresponding item.}
@@ -28,6 +49,8 @@ lsirm1pl_normal_mar_ss(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, n
 \item{jump_beta}{Numeric; the jumping rule for the beta proposal density. Default is 0.4.}
 
 \item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+
+\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -61,7 +84,7 @@ lsirm1pl_normal_mar_ss(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, n
 
 \item{missing.val}{Numeric; a number to replace missing values. Default is 99.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE.}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm1pl_normal_mar_ss} returns an object of  list containing the following components:

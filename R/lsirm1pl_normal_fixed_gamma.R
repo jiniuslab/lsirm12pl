@@ -31,12 +31,6 @@
 #'  \item{sigma}{Posterior samples of the standard deviation.}
 #'
 #' @details \code{lsirm1pl_normal_fixed_gamma} models the continuous value of response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space: \deqn{Y_{j,i} = \theta_j+\beta_i-||z_j-w_i|| + e_{j,i}} where the error \eqn{e_{j,i} \sim N(0,\sigma^2)}.
-#' @usage
-#' lsirm1pl_normal_fixed_gamma(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'                             jump_beta = 0.4, jump_theta = 1.0, jump_z = 0.5, jump_w = 0.5,
-#'                             pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0,
-#'                             pr_a_theta = 0.001, pr_b_theta = 0.001,
-#'                             pr_a_eps = 0.001, pr_b_eps = 0.001, verbose=FALSE)
 #' @examples
 #' # generate example (continuous) item response matrix
 #' data     <- matrix(rnorm(500, mean = 0, sd = 1),ncol=10,nrow=50)

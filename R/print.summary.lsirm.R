@@ -1,20 +1,11 @@
-#' Summary the result of LSIRM
+#' Print the summary the result of LSIRM
 #'
-#' @description \link{summary.lsirm} is used to summary the result of LSIRM.
+#' @description \link{print.summary.lsirm} is used to print summary the result of LSIRM.
 #'
-#' @param x object of class \code{lsirm1pl}, \code{lsirm2pl}.
-#' @param \dots Additional arguments.
+#' @param x List; summary of LSIRM with \code{summary.lsirm}.
+#' @param ... Additional arguments.
 #'
-#' @return \code{summary.lsirm} contains following elements. A print method is available.
-#' \item{call}{R call used to fit the model.}
-#' \item{coef}{Covariate coefficients posterior means.}
-#' \item{mcmc.opt}{The number of mcmc iteration, burn-in periods, and thinning intervals.}
-#' \item{map.inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
-#' \item{BIC}{Numeric value with the corresponding BIC.}
-#' \item{method}{1PL LSIRM or 2PL LSIRM }
-#' \item{missing}{The assumed missing type. One of NA, "mar" and "mcar". Default uses NA.}
-#' \item{dtype}{Binary or Continuous}
-#' \item{ss}{\code{TRUE} if using spike-slab prior}
+#' @return \code{print.summary.lsirm} return a summary of LSIRM.
 #'
 #' @examples
 #' \donttest{
@@ -23,7 +14,7 @@
 #' lsirm_result <- lsirm(data ~ lsirm1pl())
 #' summary(lsirm_result)
 #' }
-#'
+#' @rdname print.summary.lsirm
 #' @export
 print.summary.lsirm <- function(x, ...){
   cat("==========================","\n")

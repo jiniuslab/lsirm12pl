@@ -1,50 +1,43 @@
-#' Diagnostic the result of LSIRM
+#' Diagnostic the result of LSIRM.
 #'
-#' @description \code{diagnostic} is used to diagnostic the result of LSIRM.
+#' @description \code{diagnostic} checks the convergence of MCMC for LSIRM parameters using various diagnostic tools, such as trace plots, posterior density distributions, autocorrelation functions (ACF), and Gelman-Rubin-Brooks plots.
 #'
-#' @param object object of class \code{lsirm}.
-#' @param plot If \code{TRUE}, MCMC diagnostic plots are returned
-#' @param draw.item Select items for diagnosis. Parameter "alpha", however, uses "second" as a default value because the first alpha has an estimation issue. Positions and item names are supported. For instance, if the name of item is "i1", "i2", "i3" and its positions is in order, the result of \code{beta = c("i1","i2","i3")} and \code{beta = c(1,2,3)} are equivalent.
+#' @param object Object of class \code{lsirm}.
+#' @param draw.item List; Each key in the list corresponds to a specific parameters such as "beta", "theta", "gamma", "alpha", "sigma", "sigma_sd", and "zw.dist". The values of the list indicate the indices of these parameters. For the key "zw.dist", the value is a matrix with two columns: the first column represents the indices of respondents, and the second column represents the indices of items.
+#' @param gelman.diag Logical; If TRUE, the Gelman-Rubin convergence diagnostic will be printed. Default is FALSE.
 #'
 #' @return \code{diagnostic} returns plots for checking MCMC convergence for selected parameters.
 #'
 #' @examples
 #' \donttest{
-#' # generate example item response matrix
+#' # Generate example item response matrix
 #' data     <- matrix(rbinom(500, size = 1, prob = 0.5), ncol=10, nrow=50)
+#'
+#' # For 1PL LSIRM
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE))
+#' diagnostic(lsirm_result)
 #'
-#' # 1PL model
-#' diagnostic(lsirm_result, plot=TRUE)
-#'
-#' # 1PL model, multiple items
-#' diagnostic(lsirm_result, plot=TRUE, draw.item=list(beta = c(1,2,3)))
-#'
+#' # For 2PL LSIRM
 #' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE))
+#' diagnostic(lsirm_result)
 #'
-#' # 2PL model
-#' diagnostic(lsirm_result, plot=TRUE)
 #' }
-
 #' @export diagnostic
 diagnostic <- function(object,
-                       draw.item=list(beta="first",
-                                      theta="first",
-                                      alpha="second",
-                                      zw.dist = matrix(c(1, 1), ncol = 2)),
+                       draw.item = list(beta=c(1),
+                                        theta=c(1)),
                        gelman.diag = FALSE){
   UseMethod("diagnostic")
 }
 
 #' @export
 diagnostic.lsirm <- function(object,
-                             draw.item = list(beta="first",
-                                              theta="first",
-                                              alpha="second",
-                                              zw.dist = matrix(c(1, 1), ncol = 2)),
+                             draw.item = list(beta=c(1),
+                                              theta=c(1)),
                              gelman.diag = FALSE)
 {
 
+  ACF <- Chain <- Iteration <- Lag <- PSRF <- Type <- iteration <- var1 <- NULL
   orders = data.frame(idx = c(1:7),
                       param = c("beta", "theta", "gamma", "alpha", "sigma", "sigma_sd", "zw.dist"))
   which.draw = names(draw.item)
@@ -83,7 +76,7 @@ diagnostic.lsirm <- function(object,
   chain_list_all <- vector("list", length = object$chains)
 
   #### Beta  ------------
-  if(((!is.null(object[[1]]$beta))|(!is.null(object$beta))) & ("beta" %in% which.draw)){
+  if("beta" %in% which.draw){
 
     if(multi_chain){
       if(is.null(colnames(object[[1]]$data))){
@@ -317,7 +310,7 @@ diagnostic.lsirm <- function(object,
   } ## Beta
 
   ## Theta ----------
-  if(((!is.null(object[[1]]$theta))|(!is.null(object$theta))) & ("theta" %in% which.draw)){
+  if("theta" %in% which.draw){
 
     if(multi_chain){
 
@@ -549,7 +542,7 @@ diagnostic.lsirm <- function(object,
   } ## Theta
 
   ## Gamma =====
-  if(((!is.null(object[[1]]$gamma))|(!is.null(object$gamma))) & ("gamma" %in% which.draw)){
+  if("gamma" %in% which.draw){
 
     if(multi_chain){
 
@@ -742,7 +735,7 @@ diagnostic.lsirm <- function(object,
 
 
   ## alpha -----
-  if(((!is.null(object[[1]]$alpha))|(!is.null(object$alpha))) & ("alpha" %in% which.draw)){
+  if("alpha" %in% which.draw){
 
     if(multi_chain){
 
@@ -941,7 +934,7 @@ diagnostic.lsirm <- function(object,
 
 
   ## sigma --------
-  if(((!is.null(object[[1]]$sigma))|(!is.null(object$sigma))) & ("sigma" %in% which.draw)){
+  if("sigma" %in% which.draw){
 
     if(multi_chain){
 
@@ -1132,7 +1125,7 @@ diagnostic.lsirm <- function(object,
   } ## Sigma
 
   ## Sigma Theta ---------
-  if(((!is.null(object[[1]]$theta_sd))|(!is.null(object$theta_sd))) & ("theta_sd" %in% which.draw)){
+  if("theta_sd" %in% which.draw){
 
     if(multi_chain){
 
@@ -1323,9 +1316,7 @@ diagnostic.lsirm <- function(object,
   } ## Sigma theta
 
   ## zw.dist ---------
-  if(((!is.null(object[[1]]$z) & !is.null(object[[1]]$w))|
-      ((!is.null(object$w)) & (!is.null(object$z)))) &
-     ("zw.dist" %in% which.draw)){
+  if("zw.dist" %in% which.draw){
 
     if(multi_chain){
 

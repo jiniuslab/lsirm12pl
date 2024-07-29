@@ -2,11 +2,10 @@
 #'
 #' @description \link{gof} is goodness-of-fit the latent space of fitted LSIRM.
 #'
-#' @param object object of class \code{lsirm}.
-#' @param chain.idx Index of MCMC chain. default value is 1.
+#' @param object Object of class \code{lsirm}.
+#' @param chain.idx Numeric; Index of MCMC chain. Default is 1.
 #'
 #' @return \code{gof} returns the boxplot or AUC plot
-#'
 #' @examples
 #' \donttest{
 #' # generate example item response matrix

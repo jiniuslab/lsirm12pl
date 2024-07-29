@@ -7,7 +7,7 @@
 #' @importFrom MCMCpack procrustes
 #' @importFrom grDevices boxplot.stats dev.interactive devAskNewPage rainbow
 #' @importFrom graphics mtext par rug title
-#' @importFrom stats acf density printCoefmat quantile setNames ts.plot
+#' @importFrom stats acf density printCoefmat quantile setNames ts.plot dist kmeans rbinom
 #' @importFrom spatstat.geom owin
 #' @importFrom spatstat.random rpoispp
 #' @importFrom plotly ggplotly add_markers add_text
@@ -18,6 +18,8 @@
 #' @importFrom kernlab specc
 #' @importFrom plyr laply
 #' @importFrom gridExtra arrangeGrob
+#' @importFrom grDevices dev.off pdf
+#' @importFrom utils stack
 #' @import ggplot2 GPArotation dplyr pROC spatstat grid purrr parallel coda grid tidyr
 #' @useDynLib lsirm12pl
 #'

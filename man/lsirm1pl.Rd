@@ -4,10 +4,30 @@
 \alias{lsirm1pl}
 \title{Fit a 1PL LSIRM for binary and continuous item response data}
 \usage{
-lsirm1pl(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
-        ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-        jump_beta = 0.4, jump_theta = 1, jump_z = 0.5, jump_w = 0.5,
-        pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_a_theta = 0.001, pr_b_theta = 0.001, ...)
+lsirm1pl(
+  data,
+  spikenslab = FALSE,
+  fixed_gamma = FALSE,
+  missing_data = NA,
+  chains = 1,
+  multicore = 1,
+  seed = NA,
+  ndim,
+  niter,
+  nburn,
+  nthin,
+  nprint,
+  jump_beta,
+  jump_theta,
+  jump_z,
+  jump_w,
+  pr_mean_beta,
+  pr_sd_beta,
+  pr_mean_theta,
+  pr_a_theta,
+  pr_b_theta,
+  ...
+)
 }
 \arguments{
 \item{data}{Matrix; a binary or continuous item response matrix for analysis. Each row represents a respondent, and each column contains responses to the corresponding item.}
@@ -23,8 +43,6 @@ lsirm1pl(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chain
 \item{multicore}{Integer; the number of cores to use for parallel execution. Default is 1.}
 
 \item{seed}{Integer; the seed number for MCMC fitting. Default is NA.}
-
-\item{...}{Additional arguments for the for various settings. Refer to the functions in the Details.}
 
 \item{ndim}{Integer; the dimension of the latent space. Default is 2.}
 
@@ -53,6 +71,8 @@ lsirm1pl(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chain
 \item{pr_a_theta}{Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
+
+\item{\dots}{Additional arguments for the for various settings. Refer to the functions in the Details.}
 }
 \value{
 \code{lsirm1pl} returns an object of list.
@@ -104,7 +124,7 @@ If both \code{spikenslab} and \code{fixed_gamma} are set \code{TRUE}, it returns
 data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
 lsirm_result <- lsirm1pl(data)
 
-# Using the 'lsirm' function, the output is an object of class 'lsirm', enabling the application of additional methods.
+# The code following can achieve the same result.
 lsirm_result <- lsirm(data~lsirm1pl())
 
 }

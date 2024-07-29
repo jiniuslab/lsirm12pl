@@ -4,6 +4,7 @@
 #'
 #'
 #' @inheritParams lsirm1pl
+#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.0.
 #' @param pr_spike_mean Numeric; the mean of spike prior for log gamma. Default is -3.
 #' @param pr_spike_sd Numeric; the standard deviation of spike prior for log gamma. Default is 1.
 #' @param pr_slab_mean Numeric; the mean of spike prior for log gamma. Default is 0.5.
@@ -11,6 +12,7 @@
 #' @param pr_xi_a Numeric; the first shape parameter of beta prior for latent variable xi. Default is 1.
 #' @param pr_xi_b Numeric; the second shape parameter of beta prior for latent variable xi. Default is 1.
 #' @param missing.val Numeric; a number to replace missing values. Default is 99.
+#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
 #'
 #' @return \code{lsirm1pl_mar_ss} returns an object of  list containing the following components:
 #'  \item{data}{Data frame or matrix containing the variables in the model.}
@@ -45,12 +47,6 @@
 #'
 #' @references Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.
 #' Ishwaran, H., & Rao, J. S. (2005). Spike and slab variable selection: frequentist and Bayesian strategies. The Annals of Statistics, 33(2), 730-773.
-#' @usage
-#' lsirm1pl_mar_ss(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'                 jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1, jump_z = 0.5, jump_w = 0.5,
-#'                 pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0,
-#'                 pr_spike_mean = -3, pr_spike_sd = 1.0, pr_slab_mean = 0.5, pr_slab_sd = 1.0,
-#'                 pr_a_theta = 0.001, pr_b_theta = 0.001, pr_xi_a  = 1, pr_xi_b = 1,  missing.val = 99, verbose=FALSE)
 #' @examples
 #' \donttest{
 #' # generate example item response matrix

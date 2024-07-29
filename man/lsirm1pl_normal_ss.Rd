@@ -49,6 +49,8 @@ lsirm1pl_normal_ss(
 
 \item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
 
+\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
 \item{jump_w}{Numeric; the jumping rule for the w proposal density. Default is 0.5.}
@@ -71,19 +73,19 @@ lsirm1pl_normal_ss(
 
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
-\item{pr_a_eps}{Numeric; shape parameter of inverse gamma prior for variance of data likelihood. default value is 0.001.}
+\item{pr_a_eps}{Numeric; shape parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
-\item{pr_b_eps}{Numeric; scale parameter of inverse gamma prior for variance of data likelihood default value is 0.001.}
+\item{pr_b_eps}{Numeric; scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
-\item{pr_xi_a}{Numeric; first shape parameter of beta prior for latent variable xi. default value is 1.}
+\item{pr_xi_a}{Numeric; first shape parameter of beta prior for latent variable xi. Default is 1.}
 
-\item{pr_xi_b}{Numeric; second shape parameter of beta prior for latent variable xi. default value is 1.}
+\item{pr_xi_b}{Numeric; second shape parameter of beta prior for latent variable xi. Default is 1.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm1pl_normal_ss} returns an object of  list containing the following components:
- \item{data}{data frame or matrix containing the variables in the model.}
+ \item{data}{Data frame or matrix containing the variables in the model.}
  \item{bic}{Numeric value with the corresponding BIC.}
  \item{mcmc_inf}{number of mcmc iteration, burn-in periods, and thinning intervals.}
  \item{map_inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}

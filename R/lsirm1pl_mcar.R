@@ -4,10 +4,11 @@
 #' \link{lsirm1pl_mcar} factorizes item response matrix into column-wise item effect, row-wise respondent effect and further embeds interaction effect in a latent space, while ignoring the missing element under the assumption of missing completely at random. The resulting latent space provides an interaction map that represents interactions between respondents and items.
 #'
 #' @inheritParams lsirm1pl
-#' @param jump_gamma Numeric; the jumping rule for the gamma proposal density. Default is 0.025
+#' @param jump_gamma Numeric; the jumping rule for the gamma proposal density. Default is 0.025.
 #' @param pr_mean_gamma Numeric; mean of log normal prior for gamma. Default is 0.5.
 #' @param pr_sd_gamma Numeric; standard deviation of log normal prior for gamma. Default is 1.0.
 #' @param missing.val Numeric; A number to replace missing values. Default is 99.
+#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
 #'
 #' @return \code{lsirm1pl_mcar} returns an object of  list containing the following components:
 #' \item{data}{A data frame or matrix containing the variables used in the model.}
@@ -36,11 +37,6 @@
 #' @details \code{lsirm1pl_mcar} models the probability of correct response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space, with \eqn{\gamma} represents the weight of the distance term: \deqn{logit(P(Y_{j,i} = 1|\theta_j,\beta_i,\gamma,z_j,w_i))=\theta_j+\beta_i-\gamma||z_j-w_i||}Under the assumption of missing completely at random, the model ignores the missing element in doing inference. For the details of missing completely at random assumption and data augmentation, see References.
 #'
 #' @references  Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.
-#' @usage
-#' lsirm1pl_mcar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'               jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 0.025, jump_z = 0.5, jump_w = 0.5,
-#'               pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_mean_gamma = 0.5, pr_sd_gamma = 1.0,
-#'               pr_a_theta = 0.001, pr_b_theta = 0.001, missing.val = 99, verbose=FALSE
 #' @examples
 #' \donttest{
 #' # generate example item response matrix

@@ -1,39 +1,43 @@
-#' Plotting the interaction map of fitted LSIRM
+#' Plotting the interaction map or summarizing the parameter estimate of fitted LSIRM with box plot.
 #'
-#' @description \link{plot} is used to plot the latent space of fitted LSIRM.
+#' @description \link{plot} is used to plot the interaction map of fitted LSIRM or summarizing the parameter estimate of fitted LSIRM with box plot.
 #'
-#' @param x object of class \code{lsirm1pl}, \code{lsirm2pl}.
-#' @param option character; If value is "interaction", draw the interaction map that represents interactions between respondents and items. If value is "beta", draw the boxplot for the posterior samples of beta. If value is "theta", draw the distribution of the theta estimates per total test score for the \code{data}. If value is "alpha", draw the boxplot for the posterior samples of alpha. The "alpha" is only available for 2PL LSIRM.
+#' @param object Object of class \code{lsirm}.
+#' @param option Character; If value is "interaction", draw the interaction map that represents interactions between respondents and items. If value is "beta", draw the boxplot for the posterior samples of beta. If value is "theta", draw the distribution of the theta estimates per total test score for the \code{data}. If value is "alpha", draw the boxplot for the posterior samples of alpha. The "alpha" is only available for 2PL LSIRM.
 #' @param rotation Logical; If TRUE the latent positions are visualized after oblique (oblimin) rotation.
-#' @param cluster character; If value is "neyman" the cluster result are visualized by Point Process Cluster Analysis. If value is "spectral", spectral clustering method applied.
-#' @param which.clust character; Choose which values to clustering. "resp" is the option for respondent and "item" is the option for items. (default to "item")
+#' @param cluster Character; If value is "neyman" the cluster result are visualized by Point Process Cluster Analysis. If value is "spectral", spectral clustering method applied. Default is NA.
+#' @param which.clust Character; Choose which values to clustering. "resp" is the option for respondent and "item" is the option for items. Default is "item".
 #' @param interact Logical; If TRUE, draw the interaction map interactively.
-#' @param chain.idx Index of MCMC chain. default value is 1.
+#' @param chain.idx Numeric; Index of MCMC chain. Default is 1.
 #' @param ... Additional arguments for the corresponding function.
 #'
 #' @return \code{plot} returns the interaction map or boxplot for parameter estimate.
-#'
 #' @examples
 #' \donttest{
 #'
 #' # generate example item response matrix
-#' data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
-#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE))
+#' data     <- matrix(rbinom(500, size = 1, prob = 0.5), ncol=10, nrow=50)
+#' lsirm_result <- lsirm(data ~ lsirm1pl())
 #' plot(lsirm_result)
 #'
 #' # use oblique rotation
 #' plot(lsirm_result, rotation = TRUE)
 #'
-#' # plotly
+#' # interaction map interactively
 #' plot(lsirm_result, interact = TRUE)
 #'
-#' # clustering
+#' # clustering the respondents or items
 #' plot(lsirm_result, cluster = TRUE)
 #' }
-#'
 #' @export
-plot.lsirm = function(object, option = "interaction", rotation=FALSE,
-                      cluster=NA, which.clust="item", interact=FALSE, chain.idx = 1, ...){
+plot <- function(object, ..., option = "interaction", rotation=FALSE, cluster=NA,
+                 which.clust="item", interact=FALSE, chain.idx = 1){
+  UseMethod("plot")
+}
+
+#' @export
+plot.lsirm <- function(object, ..., option = "interaction", rotation=FALSE, cluster=NA,
+                       which.clust="item", interact=FALSE, chain.idx = 1){
 
   group <- NULL
   type <- NULL

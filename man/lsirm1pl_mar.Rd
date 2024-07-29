@@ -4,10 +4,28 @@
 \alias{lsirm1pl_mar}
 \title{1PL LSIRM for missing at random data.}
 \usage{
-lsirm1pl_mar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-             jump_beta = 0.4, jump_theta = 1, jump_gamma = 0.025, jump_z = 0.5, jump_w = 0.5,
-             pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0,
-             pr_mean_gamma = 0.5, pr_sd_gamma = 1, pr_a_theta = 0.001, pr_b_theta = 0.001, missing.val = 99, verbose=FALSE)
+lsirm1pl_mar(
+  data,
+  ndim = 2,
+  niter = 15000,
+  nburn = 2500,
+  nthin = 5,
+  nprint = 500,
+  jump_beta = 0.4,
+  jump_theta = 1,
+  jump_gamma = 0.025,
+  jump_z = 0.5,
+  jump_w = 0.5,
+  pr_mean_beta = 0,
+  pr_sd_beta = 1,
+  pr_mean_theta = 0,
+  pr_mean_gamma = 0.5,
+  pr_sd_gamma = 1,
+  pr_a_theta = 0.001,
+  pr_b_theta = 0.001,
+  missing.val = 99,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{Matrix; a binary or continuous item response matrix for analysis. Each row represents a respondent, and each column contains responses to the corresponding item.}

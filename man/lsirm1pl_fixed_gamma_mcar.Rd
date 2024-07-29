@@ -4,10 +4,25 @@
 \alias{lsirm1pl_fixed_gamma_mcar}
 \title{1PL LSIRM fixing gamma to 1 for missing completely at random data.}
 \usage{
-lsirm1pl_fixed_gamma_mcar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                         jump_beta = 0.4, jump_theta = 1.0, jump_z = 0.5, jump_w = 0.5,
-                         pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0,
-                         pr_a_theta = 0.001, pr_b_theta = 0.001, missing.val = 99, verbose=FALSE)
+lsirm1pl_fixed_gamma_mcar(
+  data,
+  ndim = 2,
+  niter = 15000,
+  nburn = 2500,
+  nthin = 5,
+  nprint = 500,
+  jump_beta = 0.4,
+  jump_theta = 1,
+  jump_z = 0.5,
+  jump_w = 0.5,
+  pr_mean_beta = 0,
+  pr_sd_beta = 1,
+  pr_mean_theta = 0,
+  pr_a_theta = 0.001,
+  pr_b_theta = 0.001,
+  missing.val = 99,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{Matrix; a binary or continuous item response matrix for analysis. Each row represents a respondent, and each column contains responses to the corresponding item.}
@@ -41,6 +56,8 @@ lsirm1pl_fixed_gamma_mcar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
 \item{missing.val}{Numeric; a number to replace missing values. Default is 99.}
+
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
 }
 \value{
 \code{lsirm1pl_fixed_gamma_mcar} returns an object of  list containing the following components:

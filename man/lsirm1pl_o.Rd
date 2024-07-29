@@ -4,10 +4,27 @@
 \alias{lsirm1pl_o}
 \title{1PL LSIRM.}
 \usage{
-lsirm1pl_o(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-           jump_beta = 0.4, jump_theta = 1, jump_gamma = 0.025, jump_z = 0.5, jump_w = 0.5,
-           pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0,
-           pr_mean_gamma = 0.5, pr_sd_gamma = 1, pr_a_theta = 0.001, pr_b_theta = 0.001, verbose=FALSE)
+lsirm1pl_o(
+  data,
+  ndim = 2,
+  niter = 15000,
+  nburn = 2500,
+  nthin = 5,
+  nprint = 500,
+  jump_beta = 0.4,
+  jump_theta = 1,
+  jump_gamma = 0.025,
+  jump_z = 0.5,
+  jump_w = 0.5,
+  pr_mean_beta = 0,
+  pr_sd_beta = 1,
+  pr_mean_theta = 0,
+  pr_mean_gamma = 0.5,
+  pr_sd_gamma = 1,
+  pr_a_theta = 0.001,
+  pr_b_theta = 0.001,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{Matrix; a binary or continuous item response matrix for analysis. Each row represents a respondent, and each column contains responses to the corresponding item.}
@@ -26,7 +43,7 @@ lsirm1pl_o(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
 
 \item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
 
-\item{jump_gamma}{Numeric; the jumping rule for the gamma proposal density. Default is 0.025}
+\item{jump_gamma}{Numeric; the jumping rule for the gamma proposal density. Default is 0.025.}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -50,7 +67,7 @@ lsirm1pl_o(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
 }
 \value{
 \code{lsirm1pl_o} returns an object of  list containing the following components:
-\item{data}{A data frame or matrix containing the variables used in the model.}
+\item{data}{Data frame or matrix containing the variables used in the model.}
 \item{bic}{A numeric value representing the Bayesian Information Criterion (BIC).}
 \item{mcmc_inf}{Details about the number of MCMC iterations, burn-in periods, and thinning intervals.}
 \item{map_inf}{The log maximum a posteriori (MAP) value and the iteration number at which this MAP value occurs.}

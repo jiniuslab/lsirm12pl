@@ -2,19 +2,17 @@
 #' @description \link{lsirm1pl_ss} is used to fit 1PL LSIRM with model selection approach based on spike-and-slab priors. LSIRM factorizes item response matrix into column-wise item effect, row-wise respondent effect and further embeds interaction effect in a latent space. The resulting latent space provides an interaction map that represents interactions between respondents and items.
 #'
 #' @inheritParams lsirm1pl
-#' @param pr_mean_gamma Numeric; mean of log normal prior for gamma. default value is 0.5.
-#' @param pr_sd_gamma Numeric; standard deviation of log normal prior for gamma. default value is 1.0.
-#' @param jump_gamma Numeric; jumping rule of the proposal density for gamma. default value is 0.025.
+#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.0.
 #' @param pr_spike_mean Numeric; the mean of spike prior for log gamma. Default is -3.
 #' @param pr_spike_sd Numeric; the standard deviation of spike prior for log gamma. Default is 1.
 #' @param pr_slab_mean Numeric; the mean of spike prior for log gamma. Default is 0.5.
 #' @param pr_slab_sd Numeric; the standard deviation of spike prior for log gamma. Default is is 1.
 #' @param pr_xi_a Numeric; the first shape parameter of beta prior for latent variable xi. Default is 1.
 #' @param pr_xi_b Numeric; the second shape parameter of beta prior for latent variable xi. Default is 1.
-#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE
+#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
 #'
 #' @return \code{lsirm1pl_ss} returns an object of  list containing the following components:
-#' \item{data}{A data frame or matrix containing the variables used in the model.}
+#' \item{data}{Data frame or matrix containing the variables used in the model.}
 #' \item{bic}{A numeric value representing the Bayesian Information Criterion (BIC).}
 #' \item{mcmc_inf}{Details about the number of MCMC iterations, burn-in periods, and thinning intervals.}
 #' \item{map_inf}{The log maximum a posteriori (MAP) value and the iteration number at which this MAP value occurs.}
@@ -42,12 +40,6 @@
 #'
 #' @references
 #' Ishwaran, H., & Rao, J. S. (2005). Spike and slab variable selection: Frequentist and Bayesian strategies (Vol. 33). The Annals of Statistics
-#' @usage
-#' lsirm1pl_ss(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'             jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
-#'             pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0,
-#'             pr_spike_mean = -3, pr_spike_sd = 1.0, pr_slab_mean = 0.5, pr_slab_sd = 1.0,
-#'             pr_a_theta = 0.001, pr_b_theta = 0.001, pr_xi_a  = 1, pr_xi_b = 1, verbose=FALSE)
 #'
 #' @examples
 #' \donttest{

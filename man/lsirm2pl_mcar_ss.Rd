@@ -53,7 +53,7 @@ lsirm2pl_mcar_ss(
 
 \item{jump_alpha}{Numeric; the jumping rule for the alpha proposal density. Default is 1.0.}
 
-\item{jump_gamma}{Numeric; jumping rule of the proposal density for gamma. default value is 0.025.}
+\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -65,13 +65,13 @@ lsirm2pl_mcar_ss(
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
-\item{pr_spike_mean}{Numeric; mean of spike prior for log gamma default value is -3.}
+\item{pr_spike_mean}{Numeric; the mean of spike prior for log gamma. Default is -3.}
 
-\item{pr_spike_sd}{Numeric; standard deviation of spike prior for log gamma default value is 1.}
+\item{pr_spike_sd}{Numeric; the standard deviation of spike prior for log gamma. Default is 1.}
 
-\item{pr_slab_mean}{Numeric; mean of spike prior for log gamma default value is 0.5.}
+\item{pr_slab_mean}{Numeric; the mean of spike prior for log gamma. Default is 0.5.}
 
-\item{pr_slab_sd}{Numeric; standard deviation of spike prior for log gamma default value is 1.}
+\item{pr_slab_sd}{Numeric; the standard deviation of spike prior for log gamma. Default is 1.}
 
 \item{pr_mean_alpha}{Numeric; the mean of the log normal prior for alpha. Default is 0.5.}
 
@@ -81,47 +81,42 @@ lsirm2pl_mcar_ss(
 
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
-\item{pr_xi_a}{Numeric; first shape parameter of beta prior for latent variable xi. default value is 1.}
+\item{pr_xi_a}{Numeric; the first shape parameter of beta prior for latent variable xi. Default is 1.}
 
-\item{pr_xi_b}{Numeric; second shape parameter of beta prior for latent variable xi. default value is 1.}
+\item{pr_xi_b}{Numeric; the second shape parameter of beta prior for latent variable xi. Default is 1.}
 
-\item{missing.val}{Numeric; a number to replace missing values. default value is 99.}
+\item{missing.val}{Numeric; a number to replace missing values. Default is 99.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
-
-\item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. default value is 0.5.}
-
-\item{pr_sd_gamma}{Numeric; standard deviation of log normal prior for gamma. default value is 1.0.}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_mar_ss} returns an object of  list containing the following components:
- \item{data}{data frame or matrix containing the variables in the model.}
- \item{missing.val}{a number to replace missing values.}
+  \item{data}{Data frame or matrix containing the variables in the model.}
+ \item{missing.val}{A number to replace missing values.}
  \item{bic}{Numeric value with the corresponding BIC.}
- \item{mcmc_inf}{number of mcmc iteration, burn-in periods, and thinning intervals.}
- \item{map_inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
- \item{beta_estimate}{posterior estimation of beta.}
- \item{theta_estimate}{posterior estimation of theta.}
- \item{sigma_theta_estimate}{posterior estimation of standard deviation of theta.}
- \item{gamma_estimate}{posterior estimation of gamma.}
- \item{alpha_estimate}{posterior estimation of alpha.}
- \item{z_estimate}{posterior estimation of z.}
- \item{w_estimate}{posterior estimation of w.}
- \item{pi_estimate}{posterior estimation of phi. inclusion probability of gamma. if estimation of phi is less than 0.5, choose Rasch model with gamma = 0, otherwise latent space model with gamma > 0. }
- \item{beta}{posterior samples of beta.}
- \item{theta}{posterior samples of theta.}
- \item{theta_sd}{posterior samples of standard deviation of theta.}
- \item{gamma}{posterior samples of gamma.}
- \item{alpha}{posterior samples of alpha.}
- \item{z}{posterior samples of z. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
- \item{w}{posterior samples of w. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
- \item{pi}{posterior samples of phi which is indicator of spike and slab prior. If phi is 1, log gamma follows the slab prior, otherwise follows the spike prior. }
- \item{accept_beta}{accept ratio of beta.}
- \item{accept_theta}{accept ratio of theta.}
- \item{accept_w}{accept ratio of w.}
- \item{accept_z}{accept ratio of z.}
- \item{accept_gamma}{accept ratio of gamma.}
- \item{accept_alpha}{accept ratio of alpha.}
+\item{mcmc_inf}{Details about the number of MCMC iterations, burn-in periods, and thinning intervals.}
+\item{map_inf}{The log maximum a posteriori (MAP) value and the iteration number at which this MAP value occurs.}
+\item{beta_estimate}{Posterior estimates of the beta parameter.}
+\item{theta_estimate}{Posterior estimates of the theta parameter.}
+\item{sigma_theta_estimate}{Posterior estimates of the standard deviation of theta.}
+\item{gamma_estimate}{posterior estimates of gamma parameter.}
+\item{z_estimate}{Posterior estimates of the z parameter.}
+\item{w_estimate}{Posterior estimates of the w parameter.}
+\item{beta}{Posterior samples of the beta parameter.}
+\item{theta}{Posterior samples of the theta parameter.}
+\item{gamma}{Posterior samples of the gamma parameter.}
+\item{theta_sd}{Posterior samples of the standard deviation of theta.}
+\item{z}{Posterior samples of the z parameter, represented as a 3-dimensional matrix where the last axis denotes the dimension of the latent space.}
+\item{w}{Posterior samples of the w parameter, represented as a 3-dimensional matrix where the last axis denotes the dimension of the latent space.}
+\item{pi}{Posterior samples of phi which is indicator of spike and slab prior. If phi is 1, log gamma follows the slab prior, otherwise follows the spike prior. }
+\item{accept_beta}{Acceptance ratio for the beta parameter.}
+\item{accept_theta}{Acceptance ratio for the theta parameter.}
+\item{accept_z}{Acceptance ratio for the z parameter.}
+\item{accept_w}{Acceptance ratio for the w parameter.}
+\item{accept_gamma}{Acceptance ratio for the gamma parameter.}
+\item{alpha_estimate}{Posterior estimates of the alpha parameter.}
+ \item{alpha}{Posterior estimates of the alpha parameter.}
+ \item{accept_alpha}{Acceptance ratio for the alpha parameter.}
 }
 \description{
 \link{lsirm2pl_mar_ss} is used to fit 2PL LSIRM based on spike-and-slab priors in incomplete data assumed to be missing completely at random.
@@ -150,5 +145,5 @@ lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = TRUE, fixed_gamma = FALSE,
 }
 \references{
 Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.
-Ishwaran, H., & Rao, J. S. (2005). Spike and slab variable selection: frequentist and Bayesian strategies. The Annals of Statistics, 33(2), 730-773.
+Ishwaran, H., & Rao, J. S. (2005). Spike and slab variable selection: Frequentist and Bayesian strategies. The Annals of Statistics, 33(2), 730-773.
 }

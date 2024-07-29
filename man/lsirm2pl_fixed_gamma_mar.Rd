@@ -64,36 +64,36 @@ lsirm2pl_fixed_gamma_mar(
 
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
-\item{missing.val}{Numeric; a number to replace missing values. default value is 99.}
+\item{missing.val}{Numeric; A number to replace missing values. Default is 99.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_fixed_gamma_mar} returns an object of  list containing the following components:
- \item{data}{data frame or matrix containing the variables in the model.}
- \item{missing.val}{a number to replace missing values.}
+ \item{data}{Data frame or matrix containing the variables in the model.}
+ \item{missing.val}{A number to replace missing values.}
  \item{bic}{Numeric value with the corresponding BIC.}
- \item{mcmc_inf}{number of mcmc iteration, burn-in periods, and thinning intervals.}
- \item{map_inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
- \item{beta_estimate}{posterior estimation of beta.}
- \item{theta_estimate}{posterior estimation of theta.}
- \item{sigma_theta_estimate}{posterior estimation of standard deviation of theta.}
- \item{alpha_estimate}{posterior estimation of alpha.}
- \item{z_estimate}{posterior estimation of z.}
- \item{w_estimate}{posterior estimation of w.}
- \item{imp_estimate}{probability of imputating a missing value with 1.}
- \item{beta}{posterior samples of beta.}
- \item{theta}{posterior samples of theta.}
- \item{theta_sd}{posterior samples of standard deviation of theta.}
- \item{alpha}{posterior samples of alpha.}
- \item{z}{posterior samples of z. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
- \item{w}{posterior samples of w. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
- \item{imp}{imputation for missing Values using posterior samples.}
- \item{accept_beta}{accept ratio of beta.}
- \item{accept_theta}{accept ratio of theta.}
- \item{accept_w}{accept ratio of w.}
- \item{accept_z}{accept ratio of z.}
- \item{accept_alpha}{accept ratio of alpha.}
+\item{mcmc_inf}{Details about the number of MCMC iterations, burn-in periods, and thinning intervals.}
+\item{map_inf}{The log maximum a posteriori (MAP) value and the iteration number at which this MAP value occurs.}
+\item{beta_estimate}{Posterior estimates of the beta parameter.}
+\item{theta_estimate}{Posterior estimates of the theta parameter.}
+\item{sigma_theta_estimate}{Posterior estimates of the standard deviation of theta.}
+\item{z_estimate}{Posterior estimates of the z parameter.}
+\item{w_estimate}{Posterior estimates of the w parameter.}
+ \item{imp_estimate}{Probability of imputating a missing value with 1.}
+\item{beta}{Posterior samples of the beta parameter.}
+\item{theta}{Posterior samples of the theta parameter.}
+\item{theta_sd}{Posterior samples of the standard deviation of theta.}
+\item{z}{Posterior samples of the z parameter, represented as a 3-dimensional matrix where the last axis denotes the dimension of the latent space.}
+\item{w}{Posterior samples of the w parameter, represented as a 3-dimensional matrix where the last axis denotes the dimension of the latent space.}
+ \item{imp}{Imputation for missing Values using posterior samples.}
+\item{accept_beta}{Acceptance ratio for the beta parameter.}
+\item{accept_theta}{Acceptance ratio for the theta parameter.}
+\item{accept_z}{Acceptance ratio for the z parameter.}
+\item{accept_w}{Acceptance ratio for the w parameter.}
+ \item{alpha_estimate}{Posterior estimates of the alpha parameter.}
+ \item{alpha}{Posterior estimates of the alpha parameter.}
+ \item{accept_alpha}{Acceptance ratio for the alpha parameter.}
 }
 \description{
 \link{lsirm2pl_fixed_gamma_mar} is used to fit 2PL LSIRM fixing gamma to 1 in incomplete data assumed to be missing at random.

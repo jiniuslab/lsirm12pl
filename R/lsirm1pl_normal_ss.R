@@ -4,18 +4,19 @@
 #' LSIRM factorizes continuous item response matrix into column-wise item effect, row-wise respondent effect and further embeds interaction effect in a latent space. The resulting latent space provides an interaction map that represents interactions between respondents and items.
 #'
 #' @inheritParams lsirm1pl
+#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.0.
 #' @param pr_spike_mean Numeric; mean of spike prior for log gamma default value is -3.
 #' @param pr_spike_sd Numeric; standard deviation of spike prior for log gamma default value is 1.
 #' @param pr_slab_mean Numeric; mean of spike prior for log gamma default value is 0.5.
 #' @param pr_slab_sd Numeric; standard deviation of spike prior for log gamma default value is 1.
-#' @param pr_a_eps Numeric; shape parameter of inverse gamma prior for variance of data likelihood. default value is 0.001.
-#' @param pr_b_eps Numeric; scale parameter of inverse gamma prior for variance of data likelihood default value is 0.001.
-#' @param pr_xi_a Numeric; first shape parameter of beta prior for latent variable xi. default value is 1.
-#' @param pr_xi_b Numeric; second shape parameter of beta prior for latent variable xi. default value is 1.
-#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE
+#' @param pr_a_eps Numeric; shape parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.
+#' @param pr_b_eps Numeric; scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.
+#' @param pr_xi_a Numeric; first shape parameter of beta prior for latent variable xi. Default is 1.
+#' @param pr_xi_b Numeric; second shape parameter of beta prior for latent variable xi. Default is 1.
+#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
 #'
 #' @return \code{lsirm1pl_normal_ss} returns an object of  list containing the following components:
-#'  \item{data}{data frame or matrix containing the variables in the model.}
+#'  \item{data}{Data frame or matrix containing the variables in the model.}
 #'  \item{bic}{Numeric value with the corresponding BIC.}
 #'  \item{mcmc_inf}{number of mcmc iteration, burn-in periods, and thinning intervals.}
 #'  \item{map_inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
@@ -42,7 +43,6 @@
 #'  \item{accept_gamma}{accept ratio of gamma.}
 #'
 #' @details \code{lsirm1pl_normal_ss} models the continuous value of response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space, with \eqn{\gamma} represents the weight of the distance term: \deqn{Y_{j,i} = \theta_j+\beta_i-\gamma||z_j-w_i|| + e_{j,i}} where the error \eqn{e_{j,i} \sim N(0,\sigma^2)}. \code{lsrm1pl_noraml_ss} model include model selection approach based on spike-and-slab priors for log gamma. For detail of spike-and-slab priors, see References.
-#'
 #' @references
 #' Ishwaran, H., & Rao, J. S. (2005). Spike and slab variable selection: Frequentist and Bayesian strategies (Vol. 33). The Annals of Statistics
 #'

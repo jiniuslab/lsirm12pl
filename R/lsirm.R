@@ -89,7 +89,7 @@ lsirm.formula = function(formula, ...){
 #' @param pr_mean_theta Numeric; the mean of the normal prior for theta. Default is 0.
 #' @param pr_a_theta Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
 #' @param pr_b_theta Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
-#' @param ... Additional arguments for the for various settings. Refer to the functions in the Details.
+#' @param \dots Additional arguments for the for various settings. Refer to the functions in the Details.
 #'
 #' @return \code{lsirm1pl} returns an object of list.
 #' The basic return list containing the following components:
@@ -138,23 +138,20 @@ lsirm.formula = function(formula, ...){
 #'
 #' For 1PL LSIRM with continuous item response data, the continuous value of response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space, with \eqn{\gamma} represents the weight of the distance term: \deqn{Y_{j,i} = \theta_j+\beta_i-\gamma||z_j-w_i|| + e_{j,i}} where the error \eqn{e_{j,i} \sim N(0,\sigma^2)}.
 #'
-#' @usage
-#'lsirm1pl(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
-#'         ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'         jump_beta = 0.4, jump_theta = 1, jump_z = 0.5, jump_w = 0.5,
-#'         pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_a_theta = 0.001, pr_b_theta = 0.001, ...)
 #'@examples
 #' \donttest{
 #' # generate example item response matrix
 #' data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
 #' lsirm_result <- lsirm1pl(data)
 #'
-#'# Using the 'lsirm' function, the output is an object of class 'lsirm', enabling the application of additional methods.
+#'# The code following can achieve the same result.
 #' lsirm_result <- lsirm(data~lsirm1pl())
 #'
 #' }
 #' @export
-lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA, ...) {
+lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
+                    ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_z, jump_w, pr_mean_beta,
+                    pr_sd_beta, pr_mean_theta, pr_a_theta, pr_b_theta, ...) {
   if(!is.na(seed)){
     set.seed(seed)
   }
@@ -1316,7 +1313,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
 #' @param pr_sd_alpha Numeric; the standard deviation of the log normal prior for alpha. Default is 1.0.
 #' @param pr_a_theta Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
 #' @param pr_b_theta Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
-#' @param ... Additional arguments for the for various settings. Refer to the functions in the Details.
+#' @param \dots Additional arguments for the for various settings. Refer to the functions in the Details.
 #'
 #' @return \code{lsirm2pl} returns an object of list.
 #' The basic return list containing the following components:
@@ -1367,24 +1364,21 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
 #' For 2PL LSIRM with binary item response data, the probability of correct response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space, with \eqn{\gamma} represents the weight of the distance term. For 2pl model, the the item effect is assumed to have additional discrimination parameter \eqn{\alpha_i} multiplied by \eqn{\theta_j}: \deqn{logit(P(Y_{j,i} = 1|\theta_j,\alpha_i,\beta_i,\gamma,z_j,w_i))=\theta_j*\alpha_i+\beta_i-\gamma||z_j-w_i||}
 #'
 #' For 2PL LSIRM with continuous item response data, the continuous value of response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space, with \eqn{\gamma} represents the weight of the distance term. For 2pl model, the the item effect is assumed to have additional discrimination parameter \eqn{\alpha_i} multiplied by \eqn{\theta_j}: \deqn{Y_{j,i} = \theta_j+\beta_i-\gamma||z_j-w_i|| + e_{j,i}} where the error \eqn{e_{j,i} \sim N(0,\sigma^2)}
-#' @usage
-#' lsirm2pl(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
-#'          ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'          jump_beta = 0.4, jump_theta = 1, jump_alpha = 1.0, jump_z = 0.5, jump_w = 0.5,
-#'          pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0,
-#'          pr_mean_alpha = 0.5, pr_sd_alpha = 1, pr_a_theta = 0.001, pr_b_theta = 0.001, ...)
 #'@examples
 #' \donttest{
 #' # generate example item response matrix
 #' data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
 #' lsirm_result <- lsirm2pl(data)
 #'
-#'# Using the 'lsirm' function, the output is an object of class 'lsirm', enabling the application of additional methods.
+#'# The code following can achieve the same result.
 #' lsirm_result <- lsirm(data~lsirm2pl())
 #'
 #' }
 #' @export
-lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA, ...) {
+lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
+                    ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_alpha, jump_z, jump_w, pr_mean_beta,
+                    pr_sd_beta, pr_mean_theta, pr_a_theta, pr_b_theta,
+                    pr_mean_alpha, pr_sd_alpha, ...) {
   if(!is.na(seed)){
     set.seed(seed)
   }

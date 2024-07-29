@@ -2,43 +2,39 @@
 % Please edit documentation in R/diagnostic.lsirm.R
 \name{diagnostic}
 \alias{diagnostic}
-\title{Diagnostic the result of LSIRM}
+\title{Diagnostic the result of LSIRM.}
 \usage{
 diagnostic(
   object,
-  draw.item = list(beta = "first", theta = "first", alpha = "second", zw.dist =
-    matrix(c(1, 1), ncol = 2)),
+  draw.item = list(beta = c(1), theta = c(1)),
   gelman.diag = FALSE
 )
 }
 \arguments{
-\item{object}{object of class \code{lsirm}.}
+\item{object}{Object of class \code{lsirm}.}
 
-\item{draw.item}{Select items for diagnosis. Parameter "alpha", however, uses "second" as a default value because the first alpha has an estimation issue. Positions and item names are supported. For instance, if the name of item is "i1", "i2", "i3" and its positions is in order, the result of \code{beta = c("i1","i2","i3")} and \code{beta = c(1,2,3)} are equivalent.}
+\item{draw.item}{List; Each key in the list corresponds to a specific parameters such as "beta", "theta", "gamma", "alpha", "sigma", "sigma_sd", and "zw.dist". The values of the list indicate the indices of these parameters. For the key "zw.dist", the value is a matrix with two columns: the first column represents the indices of respondents, and the second column represents the indices of items.}
 
-\item{plot}{If \code{TRUE}, MCMC diagnostic plots are returned}
+\item{gelman.diag}{Logical; If TRUE, the Gelman-Rubin convergence diagnostic will be printed. Default is FALSE.}
 }
 \value{
 \code{diagnostic} returns plots for checking MCMC convergence for selected parameters.
 }
 \description{
-\code{diagnostic} is used to diagnostic the result of LSIRM.
+\code{diagnostic} checks the convergence of MCMC for LSIRM parameters using various diagnostic tools, such as trace plots, posterior density distributions, autocorrelation functions (ACF), and Gelman-Rubin-Brooks plots.
 }
 \examples{
 \donttest{
-# generate example item response matrix
+# Generate example item response matrix
 data     <- matrix(rbinom(500, size = 1, prob = 0.5), ncol=10, nrow=50)
+
+# For 1PL LSIRM
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE))
+diagnostic(lsirm_result)
 
-# 1PL model
-diagnostic(lsirm_result, plot=TRUE)
-
-# 1PL model, multiple items
-diagnostic(lsirm_result, plot=TRUE, draw.item=list(beta = c(1,2,3)))
-
+# For 2PL LSIRM
 lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE))
+diagnostic(lsirm_result)
 
-# 2PL model
-diagnostic(lsirm_result, plot=TRUE)
 }
 }

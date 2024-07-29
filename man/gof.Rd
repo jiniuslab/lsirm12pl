@@ -7,9 +7,9 @@
 gof(object, chain.idx = 1)
 }
 \arguments{
-\item{object}{object of class \code{lsirm}.}
+\item{object}{Object of class \code{lsirm}.}
 
-\item{chain.idx}{Index of MCMC chain. default value is 1.}
+\item{chain.idx}{Numeric; Index of MCMC chain. Default is 1.}
 }
 \value{
 \code{gof} returns the boxplot or AUC plot

@@ -49,7 +49,7 @@ lsirm2pl_mcar(
 
 \item{jump_alpha}{Numeric; the jumping rule for the alpha proposal density. Default is 1.0.}
 
-\item{jump_gamma}{Numeric; jumping rule of the proposal density for gamma. default value is 0.025.}
+\item{jump_gamma}{Numeric; the jumping rule for the gamma proposal density. Default is 0.025}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -61,9 +61,9 @@ lsirm2pl_mcar(
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
-\item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. default value is 0.5.}
+\item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. Default is 0.5.}
 
-\item{pr_sd_gamma}{Numeric; standard deviation of log normal prior for gamma. default value is 1.0.}
+\item{pr_sd_gamma}{Numeric; standard deviation of log normal prior for gamma. Default is 1.0.}
 
 \item{pr_mean_alpha}{Numeric; the mean of the log normal prior for alpha. Default is 0.5.}
 
@@ -73,37 +73,37 @@ lsirm2pl_mcar(
 
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
-\item{missing.val}{Numeric; a number to replace missing values. default value is 99.}
+\item{missing.val}{Numeric; A number to replace missing values. Default is 99.}
 
-\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
+\item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_mar} returns an object of  list containing the following components:
- \item{data}{data frame or matrix containing the variables in the model.}
- \item{missing.val}{a number to replace missing values.}
+\item{data}{A data frame or matrix containing the variables used in the model.}
+ \item{missing.val}{A number to replace missing values.}
  \item{bic}{Numeric value with the corresponding BIC.}
- \item{mcmc_inf}{number of mcmc iteration, burn-in periods, and thinning intervals.}
- \item{map_inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
- \item{beta_estimate}{posterior estimation of beta.}
- \item{theta_estimate}{posterior estimation of theta.}
- \item{sigma_theta_estimate}{posterior estimation of standard deviation of theta.}
- \item{gamma_estimate}{posterior estimation of gamma.}
- \item{alpha_estimate}{posterior estimation of alpha.}
- \item{z_estimate}{posterior estimation of z.}
- \item{w_estimate}{posterior estimation of w.}
- \item{beta}{posterior samples of beta.}
- \item{theta}{posterior samples of theta.}
- \item{theta_sd}{posterior samples of standard deviation of theta.}
- \item{gamma}{posterior samples of gamma.}
- \item{alpha}{posterior samples of alpha.}
- \item{z}{posterior samples of z. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
- \item{w}{posterior samples of w. The output is 3-dimensional matrix with last axis represent the dimension of latent space.}
- \item{accept_beta}{accept ratio of beta.}
- \item{accept_theta}{accept ratio of theta.}
- \item{accept_w}{accept ratio of w.}
- \item{accept_z}{accept ratio of z.}
- \item{accept_gamma}{accept ratio of gamma.}
- \item{accept_alpha}{accept ratio of alpha.}
+\item{mcmc_inf}{Details about the number of MCMC iterations, burn-in periods, and thinning intervals.}
+\item{map_inf}{The log maximum a posteriori (MAP) value and the iteration number at which this MAP value occurs.}
+\item{beta_estimate}{Posterior estimates of the beta parameter.}
+\item{theta_estimate}{Posterior estimates of the theta parameter.}
+\item{sigma_theta_estimate}{Posterior estimates of the standard deviation of theta.}
+\item{gamma_estimate}{Posterior estimates of gamma parameter.}
+\item{z_estimate}{Posterior estimates of the z parameter.}
+\item{w_estimate}{Posterior estimates of the w parameter.}
+\item{beta}{Posterior samples of the beta parameter.}
+\item{theta}{Posterior samples of the theta parameter.}
+\item{theta_sd}{Posterior samples of the standard deviation of theta.}
+\item{gamma}{Posterior samples of the gamma parameter.}
+\item{z}{Posterior samples of the z parameter, represented as a 3-dimensional matrix where the last axis denotes the dimension of the latent space.}
+\item{w}{Posterior samples of the w parameter, represented as a 3-dimensional matrix where the last axis denotes the dimension of the latent space.}
+\item{accept_beta}{Acceptance ratio for the beta parameter.}
+\item{accept_theta}{Acceptance ratio for the theta parameter.}
+\item{accept_z}{Acceptance ratio for the z parameter.}
+\item{accept_w}{Acceptance ratio for the w parameter.}
+\item{accept_gamma}{Acceptance ratio for the gamma parameter.}
+\item{alpha_estimate}{Posterior estimates of the alpha parameter.}
+ \item{alpha}{Posterior estimates of the alpha parameter.}
+ \item{accept_alpha}{Acceptance ratio for the alpha parameter.}
 }
 \description{
 \link{lsirm2pl_mcar} is used to fit 2PL LSIRM in incomplete data assumed to be missing completely at random.

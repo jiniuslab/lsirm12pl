@@ -239,19 +239,19 @@ void progressbar(int step, int total)
   std::strftime(start_time_str, sizeof(start_time_str), "%H:%M:%S", start_time_tm);
 
   // fill progress bar with =
-  std::cout << "[";
+  Rcpp::Rcout << "[";
   for (int i = 0; i < pos; ++i) {
-    std::printf("%c", '=');
+    Rprintf("%c", '=');
   }
 
   // fill progress bar with spaces
-  std::printf("%*c", pwidth - pos + 1, ']');
+  Rprintf("%*c", pwidth - pos + 1, ']');
 
   // print percentage, ETA, and total elapsed time
-  std::printf(" %3d%% ETA: %02d:%02d:%02d \r", percent, hours, minutes, seconds);
+  Rprintf(" %3d%% ETA: %02d:%02d:%02d \r", percent, hours, minutes, seconds);
 
   // flush output to make sure it's displayed immediately
-  std::cout.flush();
+  R_FlushConsole();
 }
 
 

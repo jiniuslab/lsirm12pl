@@ -8,8 +8,8 @@
 #' @param pr_mean_gamma Numeric; mean of log normal prior for gamma. Default is 0.5.
 #' @param pr_sd_gamma Numeric; standard deviation of log normal prior for gamma. Default is 1.0.
 #' @param pr_a_eps Numeric; the shape parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.
-#' @param pr_b_eps Numeric; the scale parameter of inverse gamma prior for variance of data likelihood Default is 0.001.
-#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE.
+#' @param pr_b_eps Numeric; the scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.
+#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
 #' @param missing.val Numeric; a number to replace missing values. Default is 99.
 #'
 #' @return \code{lsirm1pl_normal_mar} returns an object of  list containing the following components:
@@ -42,11 +42,6 @@
 #'
 #' @details \code{lsirm1pl_normal_mar} models the continuous value of response by respondent \eqn{j} to item \eqn{i} with item effect \eqn{\beta_i}, respondent effect \eqn{\theta_j} and the distance between latent position \eqn{w_i} of item \eqn{i} and latent position \eqn{z_j} of respondent \eqn{j} in the shared metric space, with \eqn{\gamma} represents the weight of the distance term: \deqn{Y_j,i = \theta_j+\beta_i-\gamma||z_j-w_i|| + e_{ji}} where the error \eqn{e_{ji} \sim N(0,\sigma^2)} Under the assumption of missing at random, the model takes the missing element into consideration in the sampling procedure. For the details of missing at random assumption and data augmentation, see References.
 #' @references  Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.
-#' @usage
-#' lsirm1pl_normal_mar(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-#'                     jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
-#'                     pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_mean_gamma = 0.5, pr_sd_gamma =1.0,
-#'                     pr_a_theta = 0.001, pr_b_theta = 0.001, pr_a_eps = 0.001, pr_b_eps = 0.001, missing.val = 99, verbose=FALSE)
 #' @examples
 #' # generate example (continuous) item response matrix
 #' data     <- matrix(rnorm(500, mean = 0, sd = 1),ncol=10,nrow=50)

@@ -2,20 +2,22 @@
 #'
 #' @description \link{summary} is used to summary the result of LSIRM.
 #'
-#' @param object object of class \code{lsirm}.
-#' @param chain.idx Index of MCMC chain. default value is 1.
+#' @param object Object of class \code{lsirm}.
+#' @param chain.idx Numeric; Index of MCMC chain. Default is 1.
+#' @param estimate Character; Specifies the type of posterior estimate to provide for beta parameters. Options are \code{"mean"}, \code{"median"}, or \code{"mode"}. Default is \code{"mean"}.
+#' @param CI Numeric; The significance level for the highest posterior density interval (HPD) for the beta parameters. Default is 0.95.
 #' @param \dots Additional arguments.
 #'
 #' @return \code{summary.lsirm} contains following elements. A print method is available.
 #' \item{call}{R call used to fit the model.}
 #' \item{coef}{Covariate coefficients posterior means.}
 #' \item{mcmc.opt}{The number of mcmc iteration, burn-in periods, and thinning intervals.}
-#' \item{map.inf}{value of log maximum a posterior and iteration number which have log maximum a posterior.}
-#' \item{BIC}{Numeric value with the corresponding BIC.}
-#' \item{method}{1PL LSIRM or 2PL LSIRM }
-#' \item{missing}{The assumed missing type. One of NA, "mar" and "mcar". Default uses NA.}
-#' \item{dtype}{Type of input data(Binary or Continuous).}
-#' \item{ss}{\code{TRUE} if using spike-slab prior}
+#' \item{map.inf}{Value of log maximum a posterior and iteration number which have log maximum a posterior.}
+#' \item{BIC}{Numeric value with the corresponding Bayesian information criterion (BIC).}
+#' \item{method}{Which model is fitted.}
+#' \item{missing}{The assumed missing type. One of NA, "mar" and "mcar".}
+#' \item{dtype}{Type of input data (Binary or Continuous).}
+#' \item{ss}{Whether a model selection approach using the spike-slab prior is applied.}
 #'
 #' @examples
 #' \donttest{
@@ -26,9 +28,9 @@
 #' lsirm_result <- lsirm(data ~ lsirm1pl())
 #' summary(lsirm_result)
 #' }
-#'
+#' @rdname summary.lsirm
 #' @export
-summary.lsirm <- function(object, chain.idx = 1, estimate = 'mean', CI = 0.95 , ...)
+summary.lsirm <- function(object, chain.idx = 1, estimate = 'mean', CI = 0.95, ...)
 {
   if(object$method == "lsirm1pl") method = "lpl LSIRM"
   if(object$method == "lsirm2pl") method = "2pl LSIRM"
