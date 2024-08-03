@@ -45,7 +45,7 @@ where $\boldsymbol{\Theta} = \{\theta_{k},\beta_{i},\gamma,\boldsymbol{z_{k},w_{
 | $\sigma^{2}$ | `lsirm1pl`, `lsirm2pl` | `pr_a_theta`, `pr_b_theta` | 0.001, 0.001 |
 | $\sigma_{\epsilon}^{2}$ | `lsirm1pl`, `lsirm2pl` | `pr_a_eps`, `pr_b_eps` | 0.001, 0.001 |
 
-*Table 1: Model parameters, related models, corresponding arguments, and default values for priors. Note that for $\log \gamma$, the mode of its prior distribution is 0.61, with mean 2.72, and standard deviation 3.56.*
+*Table 1: Model parameters, related models, corresponding arguments, and default values for priors. Note that for* $\log\gamma$, *the mode of its prior distribution is 0.61, with mean 2.72, and standard deviation 3.56.*
 
 | Parameter | Models | Arguments | Default value |
 |-----------|--------|-----------|---------------|
