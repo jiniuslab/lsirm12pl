@@ -4,7 +4,7 @@
 
 The conditional posterior distributions for the common parameters are given as follows:
 
-$$
+\[
 \begin{aligned}
 \pi(\theta_{k})\propto & \left[\prod_{K=1}^{N}\prod_{i=1}^{P}\mathbb{P}(Y_{k,i}=y_{k,i}|\boldsymbol{\Theta})\right]\times
   \left[N_{\theta_{k}}(0,\sigma^{2})\right]\\
@@ -17,17 +17,17 @@ $$
 \pi(\sigma^{2})
 \propto &\,\text{Inv-Gamma}\left(\left(\frac{N}{2}+a_{\sigma}\right),\frac{1}{2}\sum_{k=1}^{N}\theta_{k}^{2}+b_{\sigma}\right).
 \end{aligned}
-$$
+\]
 
 The conditional posterior distributions of $\alpha$ and $\sigma_{\epsilon}^2$ for the 2PL LSIRM and the LSIRM-continuous, respectively, are given as follows:
 
-$$
+\[
 \begin{aligned}
     \pi(\alpha_{i})\propto & \left[\prod_{k=1}^{N}\prod_{i=1}^{P}\mathbb{P}(Y_{k,i}=y_{k,i}|\theta_{k},\alpha_{i}, \beta_{i},\gamma,\boldsymbol{z_{k},w_{i}})\right]\times  \left[\text{Log-normal}_{\alpha_{i}}(0,\tau_{\alpha}^{2})\right]\\
     \pi(\sigma_{\epsilon}^{2})
     \propto & \,\text{Inv-Gamma}\left(\left(\frac{NP}{2}+a_{\sigma_\epsilon}\right),\frac{1}{2}\sum_{k=1}^{N}\sum_{i=1}^{P}\left(y_{k,i}-\left(\theta_k +\beta_i - \gamma || {\boldsymbol{z_k}} - {\boldsymbol{w_i}} ||\right)\right)^{2}+b_{\sigma_\epsilon}\right),
 \end{aligned}
-$$
+\]
 
 where $\boldsymbol{\Theta} = \{\theta_{k},\beta_{i},\gamma,\boldsymbol{z_{k},w_{i}}\}$ for 1PL LSIRM, $\boldsymbol{\Theta} = \{\theta_{k}, \alpha_{i}, \beta_{i}, \gamma, \boldsymbol{z_{k},w_{i}}\}$ for 2PL LSIRM, and $\boldsymbol{\Theta} = \{\theta_{k}, \beta_{i}, \gamma, \boldsymbol{z_{k},w_{i}}, \sigma_{\epsilon}^2\}$ for 1PL LSIRM-continuous.
 
