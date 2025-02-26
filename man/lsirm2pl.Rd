@@ -11,7 +11,7 @@ lsirm2pl(
   missing_data = NA,
   chains = 1,
   multicore = 1,
-  seed = NA,
+  seed = 1,
   ndim = 2,
   niter = 15000,
   nburn = 2500,
@@ -45,7 +45,7 @@ lsirm2pl(
 
 \item{multicore}{Integer; the number of cores to use for parallel execution. Default is 1.}
 
-\item{seed}{Integer; the seed number for MCMC fitting. Default is NA.}
+\item{seed}{Integer; the seed number for MCMC fitting. Default is 1.}
 
 \item{ndim}{Integer; the dimension of the latent space. Default is 2.}
 
