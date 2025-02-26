@@ -74,7 +74,7 @@ lsirm.formula = function(formula, ...){
 #' @param missing_data Character; the type of missing data assumed. Options are NA, "mar", or "mcar". Default is NA.
 #' @param chains Integer; the number of MCMC chains to run. Default is 1.
 #' @param multicore Integer; the number of cores to use for parallel execution. Default is 1.
-#' @param seed Integer; the seed number for MCMC fitting. Default is 1.
+#' @param seed Integer; the seed number for MCMC fitting. Default is NA.
 #' @param ndim Integer; the dimension of the latent space. Default is 2.
 #' @param niter Integer; the total number of MCMC iterations to run. Default is 15000.
 #' @param nburn Integer; the number of initial MCMC iterations to discard as burn-in. Default is 2500.
@@ -179,7 +179,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -240,7 +240,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -306,7 +306,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -373,7 +373,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -442,7 +442,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -511,7 +511,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -580,7 +580,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -652,7 +652,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -722,7 +722,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -795,7 +795,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -866,7 +866,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -939,7 +939,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1010,7 +1010,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1083,7 +1083,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1154,7 +1154,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1227,7 +1227,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1298,7 +1298,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1371,7 +1371,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1463,7 +1463,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
 #' @param missing_data Character; the type of missing data assumed. Options are NA, "mar", or "mcar". Default is NA.
 #' @param chains Integer; the number of MCMC chains to run. Default is 1.
 #' @param multicore Integer; the number of cores to use for parallel execution. Default is 1.
-#' @param seed Integer; the seed number for MCMC fitting. Default is 1.
+#' @param seed Integer; the seed number for MCMC fitting. Default is NA.
 #' @param ndim Integer; the dimension of the latent space. Default is 2.
 #' @param niter Integer; the total number of MCMC iterations to run. Default is 15000.
 #' @param nburn Integer; the number of initial MCMC iterations to discard as burn-in. Default is 2500.
@@ -1570,7 +1570,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1642,7 +1642,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1711,7 +1711,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1779,7 +1779,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1848,7 +1848,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1917,7 +1917,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -1986,7 +1986,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2058,7 +2058,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2128,7 +2128,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2201,7 +2201,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2272,7 +2272,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2345,7 +2345,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2416,7 +2416,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2489,7 +2489,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2560,7 +2560,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2633,7 +2633,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2704,7 +2704,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
@@ -2777,7 +2777,7 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
             stop("Error: The number of chains must not be less than the number of cores. Please adjust the number of chains or cores to optimize parallel processing.")
           }else{
             cl <- makeCluster(multicore)
-            clusterSetRNGStream(cl, seed)
+            if(!is.na(seed)){clusterSetRNGStream(cl, seed)}
           }
 
           q <- chains %/% multicore
