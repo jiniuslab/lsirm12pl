@@ -149,7 +149,7 @@ lsirm.formula = function(formula, ...){
 #'
 #' }
 #' @export
-lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = 1,
+lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
                     ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500, jump_beta = 0.4, jump_theta = 1, jump_z = 0.5, jump_w = 0.5,
                     pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_a_theta = 0.001, pr_b_theta = 0.001, ...) {
 
@@ -1543,7 +1543,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
 #'
 #' }
 #' @export
-lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = 1,
+lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
                     ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500, jump_beta = 0.4, jump_theta = 1, jump_alpha = 1, jump_z = 0.5, jump_w = 0.5,
                     pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_a_theta = 0.001, pr_b_theta = 0.001,
                     pr_mean_alpha = 0.5, pr_sd_alpha = 1, ...) {
