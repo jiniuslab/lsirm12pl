@@ -1556,17 +1556,13 @@ diagnostic.lsirm <- function(object,
 
       for(i in 1:chains){
         z_temp <- matrix(0, nrow = nmcmc, ncol = nrow(draw.item$z))
-        for(j in 1:nrow(draw.item$z)){
+                  for(j in 1:nrow(draw.item$z)){
 
-          iz = draw.item$z[j,1]
-          idim = draw.item$z[j,2]
+            iz = draw.item$z[j,1]
+            idim = draw.item$z[j,2]
 
-          if(is.vector(object[[i]]$z[,iz,])){
-            z_temp[,j] <- object[[i]]$z[,iz,idim]
-          }else{
             z_temp[,j] <- object[[i]]$z[,iz,idim]
           }
-        }
         chain_list[[i]] <- matrix(z_temp, ncol = length(pnames),
                                   dimnames= list(NULL,pnames))
         if(length(chain_list_all[[i]]) == 0){
@@ -1592,11 +1588,7 @@ diagnostic.lsirm <- function(object,
         iz = draw.item$z[j,1]
         idim = draw.item$z[j,2]
 
-        if(is.vector(object$z[,iz,])){
-          z_temp[,j] <- object$z[,iz,idim]
-        }else{
-          z_temp[,j] <- object$z[,iz,idim]
-        }
+        z_temp[,j] <- object$z[,iz,idim]
 
       }
       chain_list[[1]] <- matrix(z_temp, ncol = length(pnames),
@@ -1743,17 +1735,13 @@ diagnostic.lsirm <- function(object,
 
       for(i in 1:chains){
         w_temp <- matrix(0, nrow = nmcmc, ncol = nrow(draw.item$w))
-        for(j in 1:nrow(draw.item$w)){
+                  for(j in 1:nrow(draw.item$w)){
 
-          iw = draw.item$w[j,1]
-          idim = draw.item$w[j,2]
+            iw = draw.item$w[j,1]
+            idim = draw.item$w[j,2]
 
-          if(is.vector(object[[i]]$w[,iw,])){
-            w_temp[,j] <- object[[i]]$w[,iw,idim]
-          }else{
             w_temp[,j] <- object[[i]]$w[,iw,idim]
           }
-        }
         chain_list[[i]] <- matrix(w_temp, ncol = length(pnames),
                                   dimnames= list(NULL,pnames))
         if(length(chain_list_all[[i]]) == 0){
@@ -1779,11 +1767,7 @@ diagnostic.lsirm <- function(object,
         iw = draw.item$w[j,1]
         idim = draw.item$w[j,2]
 
-        if(is.vector(object$w[,iw,])){
-          w_temp[,j] <- object$w[,iw,idim]
-        }else{
-          w_temp[,j] <- object$w[,iw,idim]
-        }
+        w_temp[,j] <- object$w[,iw,idim]
 
       }
       chain_list[[1]] <- matrix(w_temp, ncol = length(pnames),
