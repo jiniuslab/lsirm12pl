@@ -75,7 +75,7 @@ diagnostic.lsirm <- function(object,
 
   if(is.null(draw.item$beta)&("beta" %in% which.draw)) draw.item$beta = "first"
   if(is.null(draw.item$theta)&("theta" %in% which.draw)) draw.item$theta = "first"
-  if(is.null(draw.item$alpha)&("alpha" %in% which.draw)) draw.item$alpha = "second"
+  if(is.null(draw.item$alpha)&("alpha" %in% which.draw)) draw.item$alpha = 2
   if(is.null(draw.item$z)&("z" %in% which.draw)) draw.item$z = matrix(c(1, 1), ncol = 2)
   if(is.null(draw.item$w)&("w" %in% which.draw)) draw.item$w = matrix(c(1, 1), ncol = 2)
   if(is.null(draw.item$zw.dist)&("zw.dist" %in% which.draw)) draw.item$zw.dist = matrix(c(1, 1), ncol = 2)
@@ -309,12 +309,9 @@ diagnostic.lsirm <- function(object,
 
     if(multi_chain){
 
-
       if(is.null(rownames(object[[1]]$data))){
         colnames(object[[1]]$theta) = 1:ncol(object[[1]]$theta)
       }else{colnames(object[[1]]$theta) <- rownames(object[[1]]$data)}
-
-
 
       if((length(draw.item$theta) == 1) & (draw.item$theta[1] == "first")){
         draw.item.temp = colnames(object[[1]]$theta)[1]
@@ -326,7 +323,6 @@ diagnostic.lsirm <- function(object,
         draw.item.temp = draw.item$theta
         draw.item.num = which(colnames(object[[1]]$theta) %in% draw.item.temp)
       }
-
 
       pnames <- c(paste('theta [', draw.item.temp, ']', sep = ''))
       chains <- object$chains
@@ -346,8 +342,6 @@ diagnostic.lsirm <- function(object,
         colnames(object$theta) = 1:ncol(object$theta)
       }else{colnames(object$theta) <- rownames(object$data)}
 
-
-
       if((length(draw.item$theta) == 1) & (draw.item$theta[1] == "first")){
         draw.item.temp = colnames(object$theta)[1]
         draw.item.num <- 1
@@ -358,7 +352,6 @@ diagnostic.lsirm <- function(object,
         draw.item.temp = draw.item$theta
         draw.item.num = which(colnames(object$theta) %in% draw.item.temp)
       }
-
 
       pnames <- c(paste('theta [', draw.item.temp, ']', sep = ''))
       chains <- 1
@@ -733,8 +726,22 @@ diagnostic.lsirm <- function(object,
   if("alpha" %in% which.draw){
 
     if(multi_chain){
-      
-      pnames <- c(paste('alpha', sep = ''))
+      if(is.null(colnames(object[[1]]$data))){
+        colnames(object[[1]]$alpha) = 1:ncol(object[[1]]$alpha)
+      }else{colnames(object[[1]]$alpha) <- colnames(object[[1]]$data)}
+
+      if((length(draw.item$alpha) == 1) & (draw.item$alpha[1] == "first")){
+        draw.item.temp = colnames(object[[1]]$alpha)[1]
+        draw.item.num <- 1
+      }else if(is.numeric(draw.item$alpha)){
+        draw.item.temp = colnames(object[[1]]$alpha)[draw.item$alpha]
+        draw.item.num <- draw.item$alpha
+      }else{
+        draw.item.temp = draw.item$alpha
+        draw.item.num = which(colnames(object[[1]]$alpha) %in% draw.item.temp)
+      }
+
+      pnames <- c(paste('alpha [', draw.item.temp, ']', sep = ''))
       chains <- object$chains
 
       chain_list <- list()
@@ -748,10 +755,22 @@ diagnostic.lsirm <- function(object,
         }
       }
     }else{
+      if(is.null(colnames(object$data))){
+        colnames(object$alpha) = 1:ncol(object$alpha)
+      }else{colnames(object$alpha) <- colnames(object$data)}
 
+      if((length(draw.item$alpha) == 1) & (draw.item$alpha[1] == "first")){
+        draw.item.temp = colnames(object$alpha)[1]
+        draw.item.num <- 1
+      }else if(is.numeric(draw.item$alpha)){
+        draw.item.temp = colnames(object$alpha)[draw.item$alpha]
+        draw.item.num <- draw.item$alpha
+      }else{
+        draw.item.temp = draw.item$alpha
+        draw.item.num = which(colnames(object$alpha) %in% draw.item.temp)
+      }
 
-      draw.item.num <- 1
-      pnames <- c(paste('alpha', sep = ''))
+      pnames <- c(paste('alpha [', draw.item.temp, ']', sep = ''))
       chains <- 1
 
       chain_list <- list()
