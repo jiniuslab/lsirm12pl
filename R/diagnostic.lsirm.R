@@ -41,7 +41,7 @@ diagnostic.lsirm <- function(object,
                              gelman.diag = FALSE)
 {
 
-  ACF <- Chain <- Iteration <- Lag <- PSRF <- Type <- iteration <- var1 <- NULL
+  ACF <- Chain <- Iteration <- Lag <- PSRF <- Type <- iteration <- var1 <- value <- NULL
   orders = data.frame(idx = c(1:9),
                       param = c("beta", "theta", "gamma", "alpha", "sigma", "theta_sd", "z", "w", "zw.dist"))
   which.draw = names(draw.item)
@@ -165,13 +165,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -246,13 +246,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -391,13 +391,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -482,13 +482,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -590,13 +590,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -677,13 +677,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -782,13 +782,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -808,14 +808,6 @@ diagnostic.lsirm <- function(object,
           geom_hline(aes(yintercept = (exp(2*1.96/sqrt(nmcmc-3)-1)/(exp(2*1.96/sqrt(nmcmc-3)+1)))), linetype='dotted', col = 'blue') +
           ylab("Autocorrelation") +
           theme(legend.position = "none")
-        # autocorrelation_plot <- ggplot(acf_combined,
-        #                                aes(x = Lag, y = ACF,
-        #                                    color = factor(Chain), group = Chain)) +
-        #   geom_hline(aes(yintercept = 0)) +
-        #   geom_segment(mapping = aes(xend = Lag, yend = 0)) +
-        #   xlab("Lag") +
-        #   ylab("Autocorrelation") +
-        #   theme(legend.position = "none")
 
         pdf(file = NULL)
         # Call gelman.plot
@@ -873,13 +865,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -981,13 +973,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1068,13 +1060,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1172,13 +1164,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1259,13 +1251,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1398,13 +1390,13 @@ diagnostic.lsirm <- function(object,
       if(multi_chain){
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1486,13 +1478,13 @@ diagnostic.lsirm <- function(object,
       }else{
 
         # Trace Plot
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
         # Density Plot
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1613,12 +1605,12 @@ diagnostic.lsirm <- function(object,
 
       if(multi_chain){
 
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1677,12 +1669,12 @@ diagnostic.lsirm <- function(object,
         }
       }else{
 
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1792,12 +1784,12 @@ diagnostic.lsirm <- function(object,
 
       if(multi_chain){
 
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line() +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
-        density_plot <- ggplot(combined_data, aes(x = var1, fill = factor(Chain), color = factor(Chain))) +
+        density_plot <- ggplot(combined_data, aes(x = value, fill = factor(Chain), color = factor(Chain))) +
           geom_density(alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
@@ -1856,12 +1848,12 @@ diagnostic.lsirm <- function(object,
         }
       }else{
 
-        trace_plot <- ggplot(combined_data, aes(x = iteration, y = var1, group = Chain, color = factor(Chain))) +
+        trace_plot <- ggplot(combined_data, aes(x = iteration, y = value, group = Chain, color = factor(Chain))) +
           geom_line(color = "#268bd2") +
           xlab("Iterations") +
           ylab("Value") + theme(legend.position = "none")
 
-        density_plot <- ggplot(combined_data, aes(x = var1)) +
+        density_plot <- ggplot(combined_data, aes(x = value)) +
           geom_density(color = "#268bd2", fill = "#268bd2", alpha = 0.1) +
           xlab("Value") +
           ylab("Density") +
