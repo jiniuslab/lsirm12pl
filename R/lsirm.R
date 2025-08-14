@@ -89,6 +89,10 @@ lsirm.formula = function(formula, ...){
 #' @param pr_mean_theta Numeric; the mean of the normal prior for theta. Default is 0.
 #' @param pr_a_theta Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
 #' @param pr_b_theta Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
+#' @param jump_gamma Numeric; the jumping rule for the gamma proposal density. Default is 0.025.
+#' @param pr_mean_gamma Numeric; mean of log normal prior for gamma. Default is 0.5.
+#' @param pr_sd_gamma Numeric; standard deviation of log normal prior for gamma. Default is 1.0.
+#' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
 #' @param \dots Additional arguments for the for various settings. Refer to the functions in the Details.
 #'
 #' @return \code{lsirm1pl} returns an object of list.
@@ -150,8 +154,8 @@ lsirm.formula = function(formula, ...){
 #' }
 #' @export
 lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data = NA, chains = 1, multicore = 1, seed = NA,
-                    ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500, jump_beta = 0.4, jump_theta = 1, jump_z = 0.5, jump_w = 0.5,
-                    pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_a_theta = 0.001, pr_b_theta = 0.001, ...) {
+                    ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500, jump_beta = 0.4, jump_theta = 1, jump_gamma = 0.025, jump_z = 0.5, jump_w = 0.5,
+                    pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_mean_gamma = 0.5, pr_sd_gamma = 1, pr_a_theta = 0.001, pr_b_theta = 0.001, verbose = FALSE, ...) {
 
   if(!is.na(seed)){
     set.seed(seed)
@@ -168,9 +172,9 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
           output = list()
           for(i in 1:chains){
             output[[i]] <- lsirm1pl_o(data = data, ndim = ndim, niter = niter, nburn = nburn, nthin = nthin, nprint = nprint,
-                                      jump_beta = jump_beta, jump_theta = jump_theta, jump_z = jump_z, jump_w = jump_w,
+                                      jump_beta = jump_beta, jump_theta = jump_theta, jump_gamma = jump_gamma, jump_z = jump_z, jump_w = jump_w,
                                       pr_mean_beta = pr_mean_beta, pr_sd_beta = pr_sd_beta, pr_mean_theta = pr_mean_theta,
-                                      pr_a_theta = pr_a_theta, pr_b_theta = pr_b_theta, ...)
+                                      pr_mean_gamma = pr_mean_gamma, pr_sd_gamma = pr_sd_gamma, pr_a_theta = pr_a_theta, pr_b_theta = pr_b_theta, verbose = verbose, ...)
             output[[i]]$dtype <- "binary"
             cat(sprintf("Chain %d / %d completed\n", i, chains))
           }
@@ -196,7 +200,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
           tryCatch(
             for(c in 1:length(chunks)){
               X <- chunks[[c]]
-              output[[c]] <- parallel::parSapply(cl, X, function(X,data,...){lsirm1pl_o(data = data, ndim = ndim, niter = niter, nburn = nburn, nthin = nthin, nprint = nprint,                                       jump_beta = jump_beta, jump_theta = jump_theta, jump_z = jump_z, jump_w = jump_w,                                       pr_mean_beta = pr_mean_beta, pr_sd_beta = pr_sd_beta, pr_mean_theta = pr_mean_theta,                                       pr_a_theta = pr_a_theta, pr_b_theta = pr_b_theta, ...)},
+              output[[c]] <- parallel::parSapply(cl, X, function(X,data,...){lsirm1pl_o(data = data, ndim = ndim, niter = niter, nburn = nburn, nthin = nthin, nprint = nprint,                                       jump_beta = jump_beta, jump_theta = jump_theta, jump_gamma = jump_gamma, jump_z = jump_z, jump_w = jump_w,                                       pr_mean_beta = pr_mean_beta, pr_sd_beta = pr_sd_beta, pr_mean_theta = pr_mean_theta,                                       pr_mean_gamma = pr_mean_gamma, pr_sd_gamma = pr_sd_gamma, pr_a_theta = pr_a_theta, pr_b_theta = pr_b_theta, verbose = verbose, ...)},
                                                  data = data, ..., simplify = F)
               cat(sprintf("\n Chunk %d / %d processed \n", c, length(chunks)))
               # cat(sprintf("\n Core %d / %d finished",c,length(chunks)),"\n")
@@ -218,7 +222,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
         if(chains < multicore){
           warning("Warning: The number of chains is equal to 1. Please adjust the number of chains or cores to optimize parallel processing.")
         }
-        output <- lsirm1pl_o(data = data, ndim = ndim, niter = niter, nburn = nburn, nthin = nthin, nprint = nprint,                                       jump_beta = jump_beta, jump_theta = jump_theta, jump_z = jump_z, jump_w = jump_w,                                       pr_mean_beta = pr_mean_beta, pr_sd_beta = pr_sd_beta, pr_mean_theta = pr_mean_theta,                                       pr_a_theta = pr_a_theta, pr_b_theta = pr_b_theta, ...)
+        output <- lsirm1pl_o(data = data, ndim = ndim, niter = niter, nburn = nburn, nthin = nthin, nprint = nprint,                                       jump_beta = jump_beta, jump_theta = jump_theta, jump_gamma = jump_gamma, jump_z = jump_z, jump_w = jump_w,                                       pr_mean_beta = pr_mean_beta, pr_sd_beta = pr_sd_beta, pr_mean_theta = pr_mean_theta,                                       pr_mean_gamma = pr_mean_gamma, pr_sd_gamma = pr_sd_gamma, pr_a_theta = pr_a_theta, pr_b_theta = pr_b_theta, verbose = verbose, ...)
         output$dtype <- "binary"
       }else{
         stop("The number of chains must be an integer greater than 1.")
@@ -229,9 +233,9 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
         if(multicore <= 1){
           output = list()
           for(i in 1:chains){
-            output[[i]] <- lsirm1pl_normal_o(data=data, ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint, jump_beta=jump_beta, jump_theta=jump_theta,
+            output[[i]] <- lsirm1pl_normal_o(data=data, ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint, jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_gamma,
                                              jump_z=jump_z, jump_w=jump_w, pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta,
-                                             pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, ...)
+                                             pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, ...)
             output[[i]]$dtype <- "continuous"
             cat(sprintf("Chain %d / %d completed \n", i, chains))
           }
@@ -257,9 +261,9 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
           tryCatch(
             for(c in 1:length(chunks)){
               X <- chunks[[c]]
-              output[[c]] <- parallel::parSapply(cl, X, function(X,data,...){lsirm1pl_normal_o(data=data, ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint, jump_beta=jump_beta, jump_theta=jump_theta,
+              output[[c]] <- parallel::parSapply(cl, X, function(X,data,...){lsirm1pl_normal_o(data=data, ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint, jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_gamma,
                                                                                                jump_z=jump_z, jump_w=jump_w, pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta,
-                                                                                               pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, ...)},
+                                                                                               pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, ...)},
                                                  data = data, ..., simplify = F)
               cat(sprintf("\n Chunk %d / %d processed \n", c, length(chunks)))
               # cat(sprintf("\n Core %d / %d finished",c,length(chunks)),"\n")
@@ -280,9 +284,9 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
         if(chains < multicore){
           warning("Warning: The number of chains is equal to 1. Please adjust the number of chains or cores to optimize parallel processing.")
         }
-        output <- lsirm1pl_normal_o(data=data, ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint, jump_beta=jump_beta, jump_theta=jump_theta,
+        output <- lsirm1pl_normal_o(data=data, ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint, jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_gamma,
                                     jump_z=jump_z, jump_w=jump_w, pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta,
-                                    pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, ...)
+                                    pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, ...)
         output$dtype <- "continuous"
       }else{
         stop("The number of chains must be an integer greater than 1.")
@@ -1429,14 +1433,20 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
   if(chains > 1){
     for(i in 1:chains){
       output[[i]]$call <- match.call()
-      output$method <- "lsirm1pl"
       output[[i]]$method <- "lsirm1pl"
       output[[i]]$missing <- missing_data
       output[[i]]$varselect <- spikenslab
-      output$chains = chains
-      class(output) <- "lsirm"
-
+      output[[i]]$chains = chains
+      class(output[[i]]) <- "lsirm"
     }
+    
+    # Add chain names for easier access
+    names(output) <- paste0("chain", 1:chains)
+    
+    # Add overall method and chains info to the main list
+    output$method <- "lsirm1pl"
+    output$chains <- chains
+    class(output) <- "lsirm"
   }else{
     output$call <- match.call()
     output$method <- "lsirm1pl"
@@ -2835,13 +2845,20 @@ lsirm2pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
   if(chains > 1){
     for(i in 1:chains){
       output[[i]]$call <- match.call()
-      output$method <- "lsirm2pl"
       output[[i]]$method <- "lsirm2pl"
       output[[i]]$missing <- missing_data
       output[[i]]$varselect <- spikenslab
-      output$chains = chains
-      class(output) <- "lsirm"
+      output[[i]]$chains = chains
+      class(output[[i]]) <- "lsirm"
     }
+    
+    # Add chain names for easier access
+    names(output) <- paste0("chain", 1:chains)
+    
+    # Add overall method and chains info to the main list
+    output$method <- "lsirm2pl"
+    output$chains <- chains
+    class(output) <- "lsirm"
   }else{
     output$call <- match.call()
     output$method <- "lsirm2pl"
