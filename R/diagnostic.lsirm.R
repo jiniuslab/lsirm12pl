@@ -1753,7 +1753,7 @@ diagnostic.lsirm <- function(object,
     }else{
 
       draw.item.temp <- apply(draw.item$w, 1, function(row) paste(row, collapse = "-"))
-      draw.item.num <- length(draw.item$w)
+      draw.item.num <- nrow(draw.item$w)
 
       pnames <- c(paste('w [', draw.item.temp, ']', sep = ''))
 
