@@ -1556,7 +1556,7 @@ diagnostic.lsirm <- function(object,
     if(multi_chain){
 
       draw.item.temp <- apply(draw.item$z, 1, function(row) paste(row, collapse = "-"))
-      draw.item.num <- length(draw.item.temp)
+      draw.item.num <- nrow(draw.item$z)
 
       pnames <- c(paste('z [', draw.item.temp, ']', sep = ''))
       chains <- object$chains
@@ -1584,7 +1584,7 @@ diagnostic.lsirm <- function(object,
     }else{
 
       draw.item.temp <- apply(draw.item$z, 1, function(row) paste(row, collapse = "-"))
-      draw.item.num <- length(draw.item.temp)
+      draw.item.num <- nrow(draw.item$z)
 
       pnames <- c(paste('z [', draw.item.temp, ']', sep = ''))
 
