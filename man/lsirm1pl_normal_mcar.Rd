@@ -20,7 +20,7 @@ lsirm1pl_normal_mcar(
   pr_sd_beta = 1,
   pr_mean_theta = 0,
   pr_sd_theta = 1,
-  mean_gamma = 0.5,
+  pr_mean_gamma = 0.5,
   pr_sd_gamma = 1,
   pr_a_theta = 0.001,
   pr_b_theta = 0.001,
@@ -62,6 +62,8 @@ lsirm1pl_normal_mcar(
 
 \item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
 
+\item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. Default is 0.5.}
+
 \item{pr_sd_gamma}{Numeric; standard deviation of log normal prior for gamma. Default is 1.0.}
 
 \item{pr_a_theta}{Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
@@ -77,8 +79,6 @@ lsirm1pl_normal_mcar(
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 
 \item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
-
-\item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. Default is 0.5.}
 }
 \value{
 \code{lsirm1pl_normal_mcar} returns an object of  list containing the following components:
@@ -130,7 +130,7 @@ lsirm_result <- lsirm1pl_normal_mcar(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE,
-missing_data ='mcar', missing.val = 99))
+missing_data ='mcar', missing.val = 99, fix_theta = FALSE))
 
 }
 \references{

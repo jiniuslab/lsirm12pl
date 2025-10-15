@@ -29,7 +29,8 @@ lsirm1pl_mcar_ss(
   pr_xi_a = 1,
   pr_xi_b = 1,
   missing.val = 99,
-  verbose = FALSE
+  verbose = FALSE,
+  fix_theta = FALSE
 )
 }
 \arguments{
@@ -82,6 +83,8 @@ lsirm1pl_mcar_ss(
 \item{missing.val}{Numeric; a number to replace missing values. Default is 99.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm1pl_mcar_ss} returns an object of  list containing the following components:
@@ -133,7 +136,7 @@ lsirm_result <- lsirm1pl_mcar_ss(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-missing_data ='mcar', missing.val = 99))
+missing_data ='mcar', missing.val = 99, fix_theta = FALSE))
 }
 }
 \references{

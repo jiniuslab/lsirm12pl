@@ -132,7 +132,7 @@ lsirm_result <- lsirm1pl_normal_mar(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE,
-missing_data ='mar', missing.val = 99))
+missing_data ='mar', missing.val = 99, fix_theta = FALSE))
 
 }
 \references{

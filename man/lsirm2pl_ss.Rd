@@ -89,6 +89,8 @@ lsirm2pl_ss(
 \item{pr_xi_b}{Numeric; the second shape parameter of beta prior for latent variable xi. Default is 1.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_ss} returns an object of  list containing the following components:

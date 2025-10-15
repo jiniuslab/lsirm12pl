@@ -20,6 +20,7 @@ lsirm2pl_normal_ss(
   pr_mean_beta = 0,
   pr_sd_beta = 1,
   pr_mean_theta = 0,
+  pr_sd_theta = 1,
   pr_spike_mean = -3,
   pr_spike_sd = 1,
   pr_slab_mean = 0.5,
@@ -67,6 +68,8 @@ lsirm2pl_normal_ss(
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
+
 \item{pr_spike_mean}{Numeric; mean of spike prior for log gamma default value is -3.}
 
 \item{pr_spike_sd}{Numeric; standard deviation of spike prior for log gamma default value is 1.}
@@ -92,6 +95,8 @@ lsirm2pl_normal_ss(
 \item{pr_xi_b}{Numeric; second shape parameter of beta prior for latent variable xi. Default is 1.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_normal_ss} returns an object of  list containing the following components:
@@ -140,7 +145,7 @@ data     <- matrix(rnorm(500, mean = 0, sd = 1),ncol=10,nrow=50)
 lsirm_result <- lsirm2pl_normal_ss(data)
 
 # The code following can achieve the same result.
-lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = TRUE, fixed_gamma = FALSE))
+lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = TRUE, fixed_gamma = FALSE, fix_theta = FALSE))
 
 }
 \references{

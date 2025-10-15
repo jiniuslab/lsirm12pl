@@ -146,7 +146,7 @@ lsirm_result <- lsirm1pl_normal_mar_ss(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-missing_data = 'mar', missing = 99))
+missing_data = 'mar', missing = 99, fix_theta = FALSE))
 }
 \references{
 Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.

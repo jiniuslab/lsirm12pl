@@ -120,6 +120,6 @@ lsirm_result <- lsirm1pl_normal_fixed_gamma_mcar(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE,
-missing_data = "mcar", missing.val = 99))
+missing_data = "mcar", missing.val = 99, fix_theta = FALSE))
 
 }

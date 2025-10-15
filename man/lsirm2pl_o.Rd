@@ -77,6 +77,8 @@ lsirm2pl_o(
 \item{pr_b_theta}{Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_o} returns an object of  list containing the following components:
@@ -122,6 +124,6 @@ data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
 lsirm_result <- lsirm2pl_o(data)
 
 # The code following can achieve the same result.
-lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE))
+lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE, fix_theta = FALSE))
 }
 }

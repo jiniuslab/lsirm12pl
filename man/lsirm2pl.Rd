@@ -94,9 +94,9 @@ lsirm2pl(
 
 \item{pr_sd_alpha}{Numeric; the standard deviation of the log normal prior for alpha. Default is 1.0.}
 
-\item{\dots}{Additional arguments for the for various settings. Refer to the functions in the Details.}
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 
-\item{fixed_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
+\item{\dots}{Additional arguments for the for various settings. Refer to the functions in the Details.}
 }
 \value{
 \code{lsirm2pl} returns an object of list.

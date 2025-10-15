@@ -100,6 +100,6 @@ data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
 lsirm_result <- lsirm1pl_fixed_gamma(data)
 
 # The code following can achieve the same result.
-lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE))
+lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
 }
 }

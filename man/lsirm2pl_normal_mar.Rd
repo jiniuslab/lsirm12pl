@@ -86,6 +86,8 @@ lsirm2pl_normal_mar(
 \item{missing.val}{Numeric; a number to replace missing values. Default is 99.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_normal_mar} returns an object of  list containing the following components:
@@ -142,7 +144,7 @@ lsirm_result <- lsirm2pl_normal_mar(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE,
-                      missing_data = "mar"))
+                      missing_data = "mar", fix_theta = FALSE))
 }
 \references{
 Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.

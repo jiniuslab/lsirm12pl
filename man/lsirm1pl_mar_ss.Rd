@@ -139,7 +139,7 @@ lsirm_result <- lsirm1pl_mar_ss(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-missing_data = 'mar', missing = 99))
+missing_data = 'mar', missing = 99, fix_theta = FALSE))
 }
 }
 \references{

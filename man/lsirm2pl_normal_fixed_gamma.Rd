@@ -74,6 +74,8 @@ lsirm2pl_normal_fixed_gamma(
 \item{pr_b_eps}{Numeric; the scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_normal_fixed_gamma} returns an object of  list containing the following components:
@@ -117,6 +119,6 @@ data     <- matrix(rnorm(500, mean = 0, sd = 1),ncol=10,nrow=50)
 lsrm_result <- lsirm2pl_normal_fixed_gamma(data)
 
 # The code following can achieve the same result.
-lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE))
+lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
 
 }

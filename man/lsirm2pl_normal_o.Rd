@@ -20,6 +20,7 @@ lsirm2pl_normal_o(
   pr_mean_beta = 0,
   pr_sd_beta = 1,
   pr_mean_theta = 0,
+  pr_sd_theta = 1,
   pr_mean_gamma = 0.5,
   pr_sd_gamma = 1,
   pr_mean_alpha = 0.5,
@@ -63,6 +64,8 @@ lsirm2pl_normal_o(
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
+
 \item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. Default is 0.5.}
 
 \item{pr_sd_gamma}{Numeric; standard deviation of log normal prior for gamma. Default is 1.0.}
@@ -80,6 +83,8 @@ lsirm2pl_normal_o(
 \item{pr_b_eps}{Numeric; the scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.}
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
+
+\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl_normal_o} returns an object of  list containing the following components:
@@ -125,6 +130,6 @@ data <- matrix(rnorm(500, mean = 0, sd = 1),ncol=10,nrow=50)
 lsirm_result <- lsirm2pl_normal_o(data)
 
 # The code following can achieve the same result.
-lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE))
+lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE, fix_theta = FALSE))
 
 }
