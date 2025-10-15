@@ -18,7 +18,8 @@ using namespace arma;
 Rcpp::List lsirm2pl_cpp (arma::mat data, const int ndim, const int niter, const int nburn, const int nthin, const int nprint,
                        const double jump_beta, const double jump_theta, const double jump_alpha, const double jump_gamma, const double jump_z, const double jump_w,
                        const double pr_mean_beta, const double pr_sd_beta, const double pr_mean_theta, const double pr_mean_gamma, const double pr_sd_gamma,
-                       const double pr_mean_alpha, const double pr_sd_alpha, const double pr_a_theta, const double pr_b_theta, const bool verbose){
+                       const double pr_mean_alpha, const double pr_sd_alpha, const double pr_a_theta, const double pr_b_theta,
+                       const bool fix_theta, const bool verbose){
 
   int i, j, k, count, accept;
   double num, den, old_like_beta, new_like_beta, old_like_theta, new_like_theta, pr_sd_theta = 1.0;
@@ -314,10 +315,15 @@ Rcpp::List lsirm2pl_cpp (arma::mat data, const int ndim, const int niter, const 
     }
 
     //sigma_theta update with gibbs
-    post_a = 2 * pr_a_theta  + nsample;
-    post_b = pr_b_theta;
-    for(j = 0; j < nsample; j++) post_b += std::pow((oldtheta(j) - pr_mean_theta), 2.0) / 2;
-    pr_sd_theta = std::sqrt(2 * post_b *(1.0 /  R::rchisq(post_a)));
+    if(fix_theta){
+      pr_sd_theta = 1.0;
+    }else{
+      post_a = 2 * pr_a_theta  + nsample;
+      post_b = pr_b_theta;
+      for(j = 0; j < nsample; j++) post_b += std::pow((oldtheta(j) - pr_mean_theta), 2.0) / 2;
+      pr_sd_theta = std::sqrt(2 * post_b *(1.0 /  R::rchisq(post_a)));
+    }
+    
 
 
     if(iter >= nburn && iter % nthin == 0){
