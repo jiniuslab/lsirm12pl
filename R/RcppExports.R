@@ -73,8 +73,8 @@ lsirm1pl_normal_mar_cpp <- function(data, ndim, niter, nburn, nthin, nprint, jum
     .Call('_lsirm12pl_lsirm1pl_normal_mar_cpp', PACKAGE = 'lsirm12pl', data, ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_gamma, jump_z, jump_w, pr_mean_beta, pr_sd_beta, pr_mean_theta, pr_mean_gamma, pr_sd_gamma, pr_a_theta, pr_b_theta, pr_a_eps, pr_b_eps, missing, verbose)
 }
 
-lsirm2pl_cpp <- function(data, ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_alpha, jump_gamma, jump_z, jump_w, pr_mean_beta, pr_sd_beta, pr_mean_theta, pr_mean_gamma, pr_sd_gamma, pr_mean_alpha, pr_sd_alpha, pr_a_theta, pr_b_theta, verbose) {
-    .Call('_lsirm12pl_lsirm2pl_cpp', PACKAGE = 'lsirm12pl', data, ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_alpha, jump_gamma, jump_z, jump_w, pr_mean_beta, pr_sd_beta, pr_mean_theta, pr_mean_gamma, pr_sd_gamma, pr_mean_alpha, pr_sd_alpha, pr_a_theta, pr_b_theta, verbose)
+lsirm2pl_cpp <- function(data, ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_alpha, jump_gamma, jump_z, jump_w, pr_mean_beta, pr_sd_beta, pr_mean_theta, pr_mean_gamma, pr_sd_gamma, pr_mean_alpha, pr_sd_alpha, pr_a_theta, pr_b_theta, verbose, fix_theta) {
+    .Call('_lsirm12pl_lsirm2pl_cpp', PACKAGE = 'lsirm12pl', data, ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_alpha, jump_gamma, jump_z, jump_w, pr_mean_beta, pr_sd_beta, pr_mean_theta, pr_mean_gamma, pr_sd_gamma, pr_mean_alpha, pr_sd_alpha, pr_a_theta, pr_b_theta, verbose, fix_theta)
 }
 
 lsirm2pl_normal_fixed_gamma_cpp <- function(data, ndim, niter, nburn, nthin, nprint, jump_beta, jump_theta, jump_alpha, jump_z, jump_w, pr_mean_beta, pr_sd_beta, pr_a_theta, pr_b_theta, pr_mean_theta, pr_a_eps, pr_b_eps, pr_mean_alpha, pr_sd_alpha, verbose) {
