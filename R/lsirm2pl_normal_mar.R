@@ -89,7 +89,7 @@ lsirm2pl_normal_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthi
                                     pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                     pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps,
                                     pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma,
-                                    pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, missing.val=missing.val, verbose=verbose, fix_theta=fix_theta)
+                                    pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, missing=missing.val, verbose=verbose, fix_theta=fix_theta)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)

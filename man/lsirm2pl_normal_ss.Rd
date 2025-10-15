@@ -32,7 +32,8 @@ lsirm2pl_normal_ss(
   pr_b_theta = 0.001,
   pr_xi_a = 0.001,
   pr_xi_b = 0.001,
-  verbose = FALSE
+  verbose = FALSE,
+  fix_theta = FALSE
 )
 }
 \arguments{

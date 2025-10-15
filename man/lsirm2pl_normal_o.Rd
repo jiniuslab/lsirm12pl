@@ -28,7 +28,8 @@ lsirm2pl_normal_o(
   pr_b_theta = 0.001,
   pr_a_eps = 0.001,
   pr_b_eps = 0.001,
-  verbose = FALSE
+  verbose = FALSE,
+  fix_theta = FALSE
 )
 }
 \arguments{

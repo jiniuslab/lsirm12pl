@@ -90,7 +90,7 @@ lsirm1pl_normal_mar_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, n
                                        pr_spike_mean=pr_spike_mean, pr_spike_sd=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,
                                        pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,
                                        pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps,
-                                       pr_xi_a=pr_xi_a, pr_xi_b=pr_xi_b, missing.val=missing.val, verbose=verbose, fix_theta=fix_theta)
+                                       pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, missing=missing.val, verbose=verbose, fix_theta=fix_theta)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)

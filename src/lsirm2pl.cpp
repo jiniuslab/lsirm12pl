@@ -1920,7 +1920,7 @@ Rcpp::List lsirm2pl_fixed_gamma_mcar_cpp(arma::mat data, const int ndim, const i
                                          const double missing, const bool verbose, const bool fix_theta){
 
   int i, j, k, count, accept;
-  double num, den, old_like_beta, new_like_beta, old_like_theta, new_like_theta, old_like_alpha, new_like_alpha;
+  double num, den, old_like_beta, new_like_beta, old_like_theta, new_like_theta;
   double old_like_z, new_like_z, old_like_w, new_like_w, old_like_alpha, new_like_alpha ;
   double ratio, un, post_a, post_b, dist_temp, dist_old_temp, dist_new_temp;
   double pr_mean_z = 0.0, pr_sd_z = 1.0, pr_mean_w = 0.0, pr_sd_w = 1.0, mle;

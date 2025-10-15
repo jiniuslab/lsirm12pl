@@ -82,7 +82,7 @@ lsirm2pl_normal_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin
                                    jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
                                    pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                    pr_spike_mean=pr_spike_mean, pr_spike_sd=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,  pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha,
-                                   pr_a_eps=pr_a_eps,  pr_b_eps=pr_b_eps, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,  pr_xi_a=pr_xi_a, pr_xi_b=pr_xi_b, verbose=verbose, fix_theta=fix_theta)
+                                   pr_a_eps=pr_a_eps,  pr_b_eps=pr_b_eps, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,  pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, verbose=verbose, fix_theta=fix_theta)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)

@@ -20,6 +20,7 @@ lsirm2pl_mar_ss(
   pr_mean_beta = 0,
   pr_sd_beta = 1,
   pr_mean_theta = 0,
+  pr_sd_theta = 1,
   pr_spike_mean = -3,
   pr_spike_sd = 1,
   pr_slab_mean = 0.5,
@@ -31,7 +32,8 @@ lsirm2pl_mar_ss(
   pr_xi_a = 1,
   pr_xi_b = 1,
   missing.val = 99,
-  verbose = FALSE
+  verbose = FALSE,
+  fix_theta = FALSE
 )
 }
 \arguments{
@@ -64,6 +66,8 @@ lsirm2pl_mar_ss(
 \item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.0.}
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
+
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
 
 \item{pr_spike_mean}{Numeric; the mean of spike prior for log gamma. Default is -3.}
 

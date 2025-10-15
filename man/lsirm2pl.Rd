@@ -26,12 +26,14 @@ lsirm2pl(
   pr_mean_beta = 0,
   pr_sd_beta = 1,
   pr_mean_theta = 0,
+  pr_sd_theta = 1,
   pr_mean_gamma = 0.5,
   pr_sd_gamma = 1,
   pr_a_theta = 0.001,
   pr_b_theta = 0.001,
   pr_mean_alpha = 0.5,
   pr_sd_alpha = 1,
+  fix_theta = FALSE,
   ...
 )
 }
@@ -78,6 +80,8 @@ lsirm2pl(
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
+
 \item{pr_mean_gamma}{Numeric; mean of log normal prior for gamma. Default is 0.5.}
 
 \item{pr_sd_gamma}{Numeric; standard deviation of log normal prior for gamma. Default is 1.0.}
@@ -91,6 +95,8 @@ lsirm2pl(
 \item{pr_sd_alpha}{Numeric; the standard deviation of the log normal prior for alpha. Default is 1.0.}
 
 \item{\dots}{Additional arguments for the for various settings. Refer to the functions in the Details.}
+
+\item{fixed_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm2pl} returns an object of list.

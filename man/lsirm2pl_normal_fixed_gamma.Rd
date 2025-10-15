@@ -19,13 +19,15 @@ lsirm2pl_normal_fixed_gamma(
   pr_mean_beta = 0,
   pr_sd_beta = 1,
   pr_mean_theta = 0,
+  pr_sd_theta = 1,
   pr_mean_alpha = 0.5,
   pr_sd_alpha = 1,
   pr_a_theta = 0.001,
   pr_b_theta = 0.001,
   pr_a_eps = 0.001,
   pr_b_eps = 0.001,
-  verbose = FALSE
+  verbose = FALSE,
+  fix_theta = FALSE
 )
 }
 \arguments{
@@ -56,6 +58,8 @@ lsirm2pl_normal_fixed_gamma(
 \item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.0.}
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
+
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
 
 \item{pr_mean_alpha}{Numeric; the mean of the log normal prior for alpha. Default is 0.5.}
 
