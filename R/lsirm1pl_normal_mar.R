@@ -58,7 +58,7 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE,
-#' missing_data ='mar', missing.val = 99))
+#' missing_data ='mar', missing.val = 99, fix_theta = FALSE))
 #'
 #' @export
 lsirm1pl_normal_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
@@ -78,7 +78,7 @@ lsirm1pl_normal_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthi
 
 
   output <- lsirm1pl_normal_mar_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
-                                    jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_z, jump_z=jump_w,
+                                    jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
                                     pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                     pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma,
                                     pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps,

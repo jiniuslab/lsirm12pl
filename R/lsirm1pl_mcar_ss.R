@@ -59,14 +59,14 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-#' missing_data ='mcar', missing.val = 99))
+#' missing_data ='mcar', missing.val = 99, fix_theta = FALSE))
 #' }
 #' @export
 lsirm1pl_mcar_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
                             jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1, jump_z = 0.5, jump_w = 0.5,
                             pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_sd_theta = 1.0,
                             pr_spike_mean = -3, pr_spike_sd = 1.0, pr_slab_mean = 0.5, pr_slab_sd = 1.0,
-                            pr_a_theta = 0.001, pr_b_theta = 0.001, pr_xi_a  = 1, pr_xi_b = 1,  missing.val = 99, verbose=FALSE){
+                            pr_a_theta = 0.001, pr_b_theta = 0.001, pr_xi_a  = 1, pr_xi_b = 1,  missing.val = 99, verbose=FALSE, fix_theta=FALSE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }

@@ -63,7 +63,7 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-#' missing_data ='mcar', missing.val = 99))
+#' missing_data ='mcar', missing.val = 99, fix_theta = FALSE))
 #'
 #' @export
 lsirm1pl_normal_mcar_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
@@ -86,9 +86,9 @@ lsirm1pl_normal_mcar_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, 
 
 
   output <- lsirm1pl_normal_mcar_ss_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
-                                        jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_z, jump_z=jump_w,
+                                        jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
                                         pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
-                                        pr_spike_mean=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,
+                                        pr_spike_mean=pr_spike_mean, pr_spike_sd=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,
                                         pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,
                                         pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps,
                                         pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, missing=missing.val, verbose=verbose, fix_theta=fix_theta)

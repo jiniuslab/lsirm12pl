@@ -47,7 +47,7 @@
 #' lsirm_result <- lsirm2pl_o(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE, fix_theta = FALSE))
 #' }
 #' @export
 lsirm2pl_o = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
@@ -68,7 +68,8 @@ lsirm2pl_o = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, np
 
   output <- lsirm2pl_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
                          jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
-                         pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma,
+                         pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
+                         pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma,
                          pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, fix_theta=fix_theta)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)

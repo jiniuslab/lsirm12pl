@@ -37,7 +37,7 @@
 #' lsirm_result <- lsirm1pl_fixed_gamma(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE))
+#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
 #' }
 #' @export
 lsirm1pl_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
@@ -56,7 +56,7 @@ lsirm1pl_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 2500, nth
   # cat("\n\nFitting with MCMC algorithm\n")
 
   output <- lsirm1pl_fixed_gamma_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
-                           jump_beta=jump_theta, jump_theta=jump_theta, jump_z=jump_z, jump_w=jump_w,
+                           jump_beta=jump_beta, jump_theta=jump_theta, jump_z=jump_z, jump_w=jump_w,
                            pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta,
                            pr_sd_theta=pr_sd_theta, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, fix_theta=fix_theta)
 

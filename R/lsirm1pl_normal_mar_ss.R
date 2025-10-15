@@ -65,7 +65,7 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-#' missing_data = 'mar', missing = 99))
+#' missing_data = 'mar', missing = 99, fix_theta = FALSE))
 #' @export
 lsirm1pl_normal_mar_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
                                   jump_beta = 0.4, jump_theta = 1.0, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
@@ -85,7 +85,7 @@ lsirm1pl_normal_mar_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, n
   # cat("\n\nFitting with MCMC algorithm\n")
 
   output <- lsirm1pl_normal_mar_ss_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
-                                       jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_z, jump_z=jump_w,
+                                       jump_beta=jump_beta, jump_theta=jump_theta, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
                                        pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                        pr_spike_mean=pr_spike_mean, pr_spike_sd=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,
                                        pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,

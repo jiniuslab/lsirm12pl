@@ -1497,7 +1497,7 @@ lsirm1pl = function(data, spikenslab = FALSE, fixed_gamma = FALSE, missing_data 
 #' @param pr_sd_alpha Numeric; the standard deviation of the log normal prior for alpha. Default is 1.0.
 #' @param pr_a_theta Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
 #' @param pr_b_theta Numeric; the scale parameter of the inverse gamma prior for the variance of theta. Default is 0.001.
-#' @param fixed_theta Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.
+#' @param fix_theta Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.
 #' @param \dots Additional arguments for the for various settings. Refer to the functions in the Details.
 #'
 #' @return \code{lsirm2pl} returns an object of list.

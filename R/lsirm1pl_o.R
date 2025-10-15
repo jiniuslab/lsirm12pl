@@ -43,7 +43,7 @@
 #' lsirm_result <- lsirm1pl_o(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE, fix_theta = FALSE))
 #' }
 #' @export
 lsirm1pl_o = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,

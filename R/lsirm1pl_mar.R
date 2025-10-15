@@ -56,7 +56,7 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = FALSE,
-#' missing_data ='mar', missing.val = 99))
+#' missing_data ='mar', missing.val = 99, fix_theta = FALSE))
 #' }
 #' @export
 lsirm1pl_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,

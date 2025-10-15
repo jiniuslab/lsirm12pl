@@ -54,7 +54,7 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE,
-#'                       missing_data = "mar"))
+#'                       missing_data = "mar", fix_theta = FALSE))
 #' }
 #' @export
 lsirm2pl_fixed_gamma_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
@@ -75,7 +75,7 @@ lsirm2pl_fixed_gamma_mar = function(data, ndim = 2, niter = 15000, nburn = 2500,
 
 
   output <- lsirm2pl_fixed_gamma_mar_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
-                                         jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_z=jump_w, jump_w=jump_w,
+                                         jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_z=jump_z, jump_w=jump_w,
                                          pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                          pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,
                                          missing=missing.val, verbose=verbose, fix_theta=fix_theta)

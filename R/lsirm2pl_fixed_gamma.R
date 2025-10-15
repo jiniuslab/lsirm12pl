@@ -41,7 +41,7 @@
 #' lsirm_result <- lsirm2pl_fixed_gamma(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE))
+#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
 #' }
 #' @export
 lsirm2pl_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
