@@ -32,7 +32,7 @@ lsirm1pl_normal_mar_ss(
   pr_xi_b = 0.001,
   missing.val = 99,
   verbose = FALSE,
-  fix_theta = FALSE
+  fix_theta_sd = FALSE
 )
 }
 \arguments{
@@ -50,9 +50,9 @@ lsirm1pl_normal_mar_ss(
 
 \item{jump_beta}{Numeric; the jumping rule for the beta proposal density. Default is 0.4.}
 
-\item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+\item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.}
 
-\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -60,11 +60,11 @@ lsirm1pl_normal_mar_ss(
 
 \item{pr_mean_beta}{Numeric; the mean of the normal prior for beta. Default is 0.}
 
-\item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.0.}
+\item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.}
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
-\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.}
 
 \item{pr_spike_mean}{Numeric; the mean of spike prior for log gamma. Default is -3.}
 
@@ -90,7 +90,7 @@ lsirm1pl_normal_mar_ss(
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 
-\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
+\item{fix_theta_sd}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm1pl_normal_mar_ss} returns an object of  list containing the following components:
@@ -146,7 +146,7 @@ lsirm_result <- lsirm1pl_normal_mar_ss(data)
 
 # The code following can achieve the same result.
 lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE,
-missing_data = 'mar', missing = 99, fix_theta = FALSE))
+missing_data = 'mar', missing = 99))
 }
 \references{
 Little, R. J., & Rubin, D. B. (2019). Statistical analysis with missing data (Vol. 793). John Wiley & Sons.

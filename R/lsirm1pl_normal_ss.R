@@ -4,7 +4,7 @@
 #' LSIRM factorizes continuous item response matrix into column-wise item effect, row-wise respondent effect and further embeds interaction effect in a latent space. The resulting latent space provides an interaction map that represents interactions between respondents and items.
 #'
 #' @inheritParams lsirm1pl
-#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.0.
+#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.
 #' @param pr_spike_mean Numeric; mean of spike prior for log gamma default value is -3.
 #' @param pr_spike_sd Numeric; standard deviation of spike prior for log gamma default value is 1.
 #' @param pr_slab_mean Numeric; mean of spike prior for log gamma default value is 0.5.
@@ -55,7 +55,7 @@
 #' lsirm_result <- lsirm1pl_normal_ss(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE, fix_theta = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = TRUE, fixed_gamma = FALSE))
 #'
 #' @export
 lsirm1pl_normal_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
@@ -64,7 +64,7 @@ lsirm1pl_normal_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin
                               pr_spike_mean = -3, pr_spike_sd = 1.0, pr_slab_mean = 0.5, pr_slab_sd = 1.0,
                               pr_a_theta = 0.001, pr_b_theta = 0.001,
                               pr_a_eps = 0.001, pr_b_eps = 0.001,
-                              pr_xi_a = 0.001, pr_xi_b = 0.001, verbose=FALSE, fix_theta=FALSE){
+                              pr_xi_a = 0.001, pr_xi_b = 0.001, verbose=FALSE, fix_theta_sd=FALSE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -83,7 +83,7 @@ lsirm1pl_normal_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin
                                    pr_spike_mean=pr_spike_mean, pr_spike_sd=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,
                                    pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,
                                    pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps,
-                                   pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, verbose=verbose, fix_theta=fix_theta)
+                                   pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, verbose=verbose, fix_theta_sd=fix_theta_sd)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
@@ -156,7 +156,7 @@ cat("\n")
                  z_estimate     = z.est,
                  w_estimate     = w.est,
                  pi_estimate    = pi.estimate,
-                 beta           = output$beta,
+                 xi_estimate    = xi.estimate,                 beta           = output$beta,
                  theta          = output$theta,
                  theta_sd       = output$sigma_theta,
                  sigma       = output$sigma,
@@ -166,7 +166,7 @@ cat("\n")
                  z_raw          = output$z,
                  w_raw          = output$w,
                  pi             = output$pi,
-                 accept_beta    = output$accept_beta,
+                 xi             = output$xi,                 accept_beta    = output$accept_beta,
                  accept_theta   = output$accept_theta,
                  accept_w       = output$accept_w,
                  accept_z       = output$accept_z,

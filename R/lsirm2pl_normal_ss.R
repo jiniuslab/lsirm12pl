@@ -3,7 +3,7 @@
 #' @description \link{lsirm2pl_normal_ss} is used to fit 2PL LSIRM for continuous variable with model selection approach.
 #' \link{lsirm2pl_normal_ss} factorizes item response matrix into column-wise item effect, row-wise respondent effect and further embeds interaction effect in a latent space. Unlike 1PL model, 2PL model assumes the item effect can vary according to respondent, allowing additional parameter multiplied with respondent effect. The resulting latent space provides an interaction map that represents interactions between respondents and items.
 #' @inheritParams lsirm2pl
-#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.0.
+#' @param jump_gamma Numeric; the jumping rule for the theta proposal density. Default is 1.
 #' @param pr_spike_mean Numeric; mean of spike prior for log gamma default value is -3.
 #' @param pr_spike_sd Numeric; standard deviation of spike prior for log gamma default value is 1.
 #' @param pr_slab_mean Numeric; mean of spike prior for log gamma default value is 0.5.
@@ -57,15 +57,15 @@
 #' lsirm_result <- lsirm2pl_normal_ss(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = TRUE, fixed_gamma = FALSE, fix_theta = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = TRUE, fixed_gamma = FALSE))
 #'
 #' @export
 lsirm2pl_normal_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                              jump_beta = 0.4, jump_theta = 1.0, jump_alpha = 1.0, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
+                              jump_beta = 0.4, jump_theta = 1.0, jump_alpha = 1, jump_gamma = 1.0, jump_z = 0.5, jump_w = 0.5,
                               pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_sd_theta = 1.0,
                               pr_spike_mean = -3, pr_spike_sd = 1.0, pr_slab_mean = 0.5, pr_slab_sd = 1.0,
                               pr_mean_alpha = 0.5, pr_sd_alpha = 1,
-                              pr_a_eps = 0.001, pr_b_eps = 0.001, pr_a_theta = 0.001, pr_b_theta = 0.001, pr_xi_a = 0.001, pr_xi_b = 0.001, verbose=FALSE, fix_theta=FALSE){
+                              pr_a_eps = 0.001, pr_b_eps = 0.001, pr_a_theta = 0.001, pr_b_theta = 0.001, pr_xi_a = 0.001, pr_xi_b = 0.001, verbose=FALSE, fix_theta_sd=FALSE, fix_alpha_1=TRUE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -82,7 +82,7 @@ lsirm2pl_normal_ss = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin
                                    jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
                                    pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                    pr_spike_mean=pr_spike_mean, pr_spike_sd=pr_spike_sd, pr_slab_mean=pr_slab_mean, pr_slab_sd=pr_slab_sd,  pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, 
-                                   pr_a_eps=pr_a_eps,  pr_b_eps=pr_b_eps, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,  pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, verbose=verbose, fix_theta=fix_theta)
+                                   pr_a_eps=pr_a_eps,  pr_b_eps=pr_b_eps, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,  pr_beta_a=pr_xi_a, pr_beta_b=pr_xi_b, verbose=verbose, fix_theta_sd=fix_theta_sd, fix_alpha_1=fix_alpha_1)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
@@ -157,7 +157,7 @@ cat("\n")
                  z_estimate     = z.est,
                  w_estimate     = w.est,
                  pi_estimate    = pi.estimate,
-                 beta           = output$beta,
+                 xi_estimate    = xi.estimate,                 beta           = output$beta,
                  theta          = output$theta,
                  theta_sd       = output$sigma_theta,
                  sigma          = output$sigma,
@@ -168,7 +168,7 @@ cat("\n")
                  z_raw          = output$z,
                  w_raw          = output$w,
                  pi             = output$pi,
-                 accept_beta    = output$accept_beta,
+                 xi             = output$xi,                 accept_beta    = output$accept_beta,
                  accept_theta   = output$accept_theta,
                  accept_w       = output$accept_w,
                  accept_z       = output$accept_z,

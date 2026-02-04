@@ -46,14 +46,14 @@
 #' lsirm_result <- lsirm1pl_normal_fixed_gamma(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE))
 #'
 #' @export
 lsirm1pl_normal_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
                                        jump_beta = 0.4, jump_theta = 1.0, jump_z = 0.5, jump_w = 0.5,
                                        pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_sd_theta = 1.0,
                                        pr_a_theta = 0.001, pr_b_theta = 0.001,
-                                       pr_a_eps = 0.001, pr_b_eps = 0.001, verbose=FALSE, fix_theta=FALSE){
+                                       pr_a_eps = 0.001, pr_b_eps = 0.001, verbose=FALSE, fix_theta_sd=FALSE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -67,7 +67,7 @@ lsirm1pl_normal_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 25
   output <- lsirm1pl_normal_fixed_gamma_cpp(data=as.matrix(data),  ndim=ndim,  niter=niter,  nburn=nburn,  nthin=nthin,  nprint=nprint,
                                             jump_beta=jump_beta, jump_theta=jump_theta, jump_z=jump_z, jump_w=jump_w,
                                             pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
-                                            pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,  pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps, verbose=verbose, fix_theta=fix_theta)
+                                            pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta,  pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps, verbose=verbose, fix_theta_sd=fix_theta_sd)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
@@ -141,6 +141,13 @@ cat("\n")
                  accept_theta   = output$accept_theta,
                  accept_w       = output$accept_w,
                  accept_z       = output$accept_z)
+
+  result$call <- match.call()
+  result$method <- "lsirm1pl"
+  result$dtype <- "continuous"
+  result$chains <- 1
+  result$varselect <- FALSE
+  result$fixed_gamma <- TRUE
   class(result) = "lsirm"
 
   return(result)

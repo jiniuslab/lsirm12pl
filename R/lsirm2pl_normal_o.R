@@ -4,9 +4,9 @@
 #' \link{lsirm2pl_normal_o} factorizes item response matrix into column-wise item effect, row-wise respondent effect and further embeds interaction effect in a latent space. Unlike 1PL model, 2PL model assumes the item effect can vary according to respondent, allowing additional parameter multiplied with respondent effect. The resulting latent space provides an interaction map that represents interactions between respondents and items.
 #'
 #' @inheritParams lsirm2pl
-#' @param jump_gamma Numeric; the jumping rule for the gamma proposal density. Default is 0.025
+#' @param jump_gamma Numeric; the jumping rule for the gamma proposal density. Default is 0.2
 #' @param pr_mean_gamma Numeric; mean of log normal prior for gamma. Default is 0.5.
-#' @param pr_sd_gamma Numeric; standard deviation of log normal prior for gamma. Default is 1.0.
+#' @param pr_sd_gamma Numeric; standard deviation of log normal prior for gamma. Default is 1.
 #' @param pr_a_eps Numeric; the shape parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.
 #' @param pr_b_eps Numeric; the scale parameter of inverse gamma prior for variance of data likelihood. Default is 0.001.
 #' @param verbose Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.
@@ -48,15 +48,15 @@
 #' lsirm_result <- lsirm2pl_normal_o(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE, fix_theta = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = FALSE))
 #'
 #' @export
 lsirm2pl_normal_o = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                             jump_beta = 0.4, jump_theta = 1.0, jump_alpha = 1.0, jump_gamma = 0.025, jump_z = 0.5, jump_w = 0.5,
+                             jump_beta = 0.4, jump_theta = 1.0, jump_alpha = 1, jump_gamma = 0.2, jump_z = 0.5, jump_w = 0.5,
                              pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_sd_theta = 1.0,
                              pr_mean_gamma = 0.5, pr_sd_gamma =1.0,
                              pr_mean_alpha = 0.5, pr_sd_alpha = 1,
-                             pr_a_theta = 0.001, pr_b_theta = 0.001,pr_a_eps = 0.001, pr_b_eps = 0.001, verbose=FALSE, fix_theta=FALSE){
+                             pr_a_theta = 0.001, pr_b_theta = 0.001,pr_a_eps = 0.001, pr_b_eps = 0.001, verbose=FALSE, fix_theta_sd=FALSE, fix_alpha_1=TRUE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -72,7 +72,7 @@ lsirm2pl_normal_o = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin 
   output <- lsirm2pl_normal_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
                                 jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_gamma=jump_gamma, jump_z=jump_z, jump_w=jump_w,
                                 pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
-                                pr_a_eps=pr_a_eps,  pr_b_eps=pr_b_eps, pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma, pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, verbose=verbose, fix_theta=fix_theta)
+                                pr_a_eps=pr_a_eps,  pr_b_eps=pr_b_eps, pr_mean_gamma=pr_mean_gamma, pr_sd_gamma=pr_sd_gamma, pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, verbose=verbose, fix_theta_sd=fix_theta_sd, fix_alpha_1=fix_alpha_1)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
@@ -124,7 +124,7 @@ cat("\n")
   # Calculate BIC
   # cat("\n\nCalculate BIC\n")
   log_like = log_likelihood_normal2pl_cpp(as.matrix(data), ndim, as.matrix(beta.estimate), as.matrix(alpha.estimate), as.matrix(theta.estimate), gamma.estimate, z.est, w.est, sigma.estimate, 99)
-  p = 2 * nitem + nsample + 1 + 1 + ndim * nitem + ndim * nsample + 1
+  p = 2 * nitem + nsample + 1 + 1 + ndim * nitem + ndim * nsample + 1 + 1 # added sigma
   bic = -2 * log_like[[1]] + p * log(nsample * nitem)
 
   result <- list(data = data,
@@ -157,6 +157,14 @@ cat("\n")
                  accept_gamma   = output$accept_gamma,
                  accept_alpha   = output$accept_alpha)
   class(result) = "lsirm"
+
+  result$call <- match.call()
+  result$method <- "lsirm2pl"
+  result$missing <- NA
+  result$dtype <- "continuous"
+  result$chains <- 1
+  result$varselect <- FALSE
+  result$fixed_gamma <- FALSE
 
   return(result)
 }

@@ -22,7 +22,7 @@ lsirm1pl_fixed_gamma(
   pr_a_theta = 0.001,
   pr_b_theta = 0.001,
   verbose = FALSE,
-  fix_theta = FALSE
+  fix_theta_sd = FALSE
 )
 }
 \arguments{
@@ -40,7 +40,7 @@ lsirm1pl_fixed_gamma(
 
 \item{jump_beta}{Numeric; the jumping rule for the beta proposal density. Default is 0.4.}
 
-\item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+\item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -48,11 +48,11 @@ lsirm1pl_fixed_gamma(
 
 \item{pr_mean_beta}{Numeric; the mean of the normal prior for beta. Default is 0.}
 
-\item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.0.}
+\item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.}
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
-\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.}
 
 \item{pr_a_theta}{Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
@@ -60,7 +60,7 @@ lsirm1pl_fixed_gamma(
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. default value is FALSE}
 
-\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
+\item{fix_theta_sd}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
 }
 \value{
 \code{lsirm1pl_fixed_gamma} returns an object of  list containing the following components:
@@ -100,6 +100,6 @@ data     <- matrix(rbinom(500, size = 1, prob = 0.5),ncol=10,nrow=50)
 lsirm_result <- lsirm1pl_fixed_gamma(data)
 
 # The code following can achieve the same result.
-lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
+lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE))
 }
 }

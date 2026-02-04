@@ -55,14 +55,14 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE,
-#'                       missing_data = "mar", fix_theta = FALSE))
+#'                       missing_data = "mar"))
 #'
 #' @export
 lsirm2pl_normal_fixed_gamma_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                                           jump_beta = 0.4, jump_theta = 1.0, jump_alpha = 1.0, jump_z = 0.5, jump_w = 0.5,
+                                           jump_beta = 0.4, jump_theta = 1.0, jump_alpha = 1, jump_z = 0.5, jump_w = 0.5,
                                            pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_sd_theta = 1.0,
                                            pr_mean_alpha = 0.5, pr_sd_alpha = 1,
-                                           pr_a_theta = 0.001, pr_b_theta = 0.001,pr_a_eps = 0.001, pr_b_eps = 0.001, missing.val = 99, verbose=FALSE, fix_theta=FALSE){
+                                           pr_a_theta = 0.001, pr_b_theta = 0.001,pr_a_eps = 0.001, pr_b_eps = 0.001, missing.val = 99, verbose=FALSE, fix_theta_sd=FALSE, fix_alpha_1=TRUE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -80,7 +80,7 @@ lsirm2pl_normal_fixed_gamma_mar = function(data, ndim = 2, niter = 15000, nburn 
                                                 pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta,
                                                 pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
                                                 pr_a_eps=pr_a_eps, pr_b_eps=pr_b_eps,
-                                                pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, missing=missing.val, verbose=verbose, fix_theta=fix_theta)
+                                                pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, missing=missing.val, verbose=verbose, fix_theta_sd=fix_theta_sd, fix_alpha_1=fix_alpha_1)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
@@ -133,7 +133,6 @@ cat("\n")
   # Calculate BIC
   # cat("\n\nCalculate BIC\n")
   missing_est = ifelse(imp.estimate > 0.5, 1, 0)
-  data[data == missing.val] = missing_est
   log_like = log_likelihood_normal2pl_cpp(as.matrix(data), ndim, as.matrix(beta.estimate), as.matrix(alpha.estimate), as.matrix(theta.estimate), 1, z.est, w.est, sigma.estimate, missing.val)
   p = 2 * nitem + nsample + 1 + ndim * nitem + ndim * nsample + 1
   bic = -2 * log_like[[1]] + p * log(nitem * nsample)

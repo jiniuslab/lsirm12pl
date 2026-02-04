@@ -32,7 +32,8 @@ lsirm2pl_ss(
   pr_xi_a = 1,
   pr_xi_b = 1,
   verbose = FALSE,
-  fix_theta = FALSE
+  fix_theta_sd = FALSE,
+  fix_alpha_1 = TRUE
 )
 }
 \arguments{
@@ -50,11 +51,11 @@ lsirm2pl_ss(
 
 \item{jump_beta}{Numeric; the jumping rule for the beta proposal density. Default is 0.4.}
 
-\item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+\item{jump_theta}{Numeric; the jumping rule for the theta proposal density. Default is 1.}
 
-\item{jump_alpha}{Numeric; the jumping rule for the alpha proposal density. Default is 1.0.}
+\item{jump_alpha}{Numeric; the jumping rule for the alpha proposal density. Default is 1.}
 
-\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.0.}
+\item{jump_gamma}{Numeric; the jumping rule for the theta proposal density. Default is 1.}
 
 \item{jump_z}{Numeric; the jumping rule for the z proposal density. Default is 0.5.}
 
@@ -62,11 +63,11 @@ lsirm2pl_ss(
 
 \item{pr_mean_beta}{Numeric; the mean of the normal prior for beta. Default is 0.}
 
-\item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.0.}
+\item{pr_sd_beta}{Numeric; the standard deviation of the normal prior for beta. Default is 1.}
 
 \item{pr_mean_theta}{Numeric; the mean of the normal prior for theta. Default is 0.}
 
-\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.0.}
+\item{pr_sd_theta}{Numeric; the standard deviation of the normal prior for theta. Default is 1.}
 
 \item{pr_spike_mean}{Numeric; the mean of spike prior for log gamma. Default is -3.}
 
@@ -78,7 +79,7 @@ lsirm2pl_ss(
 
 \item{pr_mean_alpha}{Numeric; the mean of the log normal prior for alpha. Default is 0.5.}
 
-\item{pr_sd_alpha}{Numeric; the standard deviation of the log normal prior for alpha. Default is 1.0.}
+\item{pr_sd_alpha}{Numeric; the standard deviation of the log normal prior for alpha. Default is 1.}
 
 \item{pr_a_theta}{Numeric; the shape parameter of the inverse gamma prior for the variance of theta. Default is 0.001.}
 
@@ -90,7 +91,9 @@ lsirm2pl_ss(
 
 \item{verbose}{Logical; If TRUE, MCMC samples are printed for each \code{nprint}. Default is FALSE.}
 
-\item{fix_theta}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
+\item{fix_theta_sd}{Logical; If TRUE, the standard deviation of the theta parameter is fixed. Default is FALSE.}
+
+\item{fix_alpha_1}{Logical; If TRUE, the first element of the alpha parameter is fixed to 1. Default is TRUE.}
 }
 \value{
 \code{lsirm2pl_ss} returns an object of  list containing the following components:

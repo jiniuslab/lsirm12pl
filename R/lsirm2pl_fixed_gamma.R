@@ -41,13 +41,13 @@
 #' lsirm_result <- lsirm2pl_fixed_gamma(data)
 #'
 #' # The code following can achieve the same result.
-#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE, fix_theta = FALSE))
+#' lsirm_result <- lsirm(data ~ lsirm2pl(spikenslab = FALSE, fixed_gamma = TRUE))
 #' }
 #' @export
 lsirm2pl_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
-                                jump_beta = 0.4, jump_theta = 1, jump_alpha = 1.0, jump_z = 0.5, jump_w = 0.5,
+                                jump_beta = 0.4, jump_theta = 1, jump_alpha = 1, jump_z = 0.5, jump_w = 0.5,
                                 pr_mean_beta = 0, pr_sd_beta = 1, pr_mean_theta = 0, pr_sd_theta = 1,
-                                pr_mean_alpha = 0.5, pr_sd_alpha = 1, pr_a_theta = 0.001, pr_b_theta = 0.001, verbose=FALSE, fix_theta=FALSE){
+                                pr_mean_alpha = 0.5, pr_sd_alpha = 1, pr_a_theta = 0.001, pr_b_theta = 0.001, verbose=FALSE, fix_theta_sd=FALSE, fix_alpha_1=TRUE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -63,7 +63,7 @@ lsirm2pl_fixed_gamma = function(data, ndim = 2, niter = 15000, nburn = 2500, nth
   output <- lsirm2pl_fixed_gamma_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
                                      jump_beta=jump_beta, jump_theta=jump_theta, jump_alpha=jump_alpha, jump_z=jump_z, jump_w=jump_w,
                                      pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta, pr_sd_theta=pr_sd_theta,
-                                     pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, fix_theta=fix_theta)
+                                     pr_mean_alpha=pr_mean_alpha, pr_sd_alpha=pr_sd_alpha, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, verbose=verbose, fix_theta_sd=fix_theta_sd, fix_alpha_1=fix_alpha_1)
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
   nitem <- ncol(data)
@@ -123,12 +123,14 @@ cat("\n")
                  beta_summary = beta.summary,
                  theta_estimate = theta.estimate,
                  sigma_theta_estimate    = sigma_theta.estimate,
-                 alhpa_estimate = alpha.estimate,
+              gamma_estimate = 1,
+              alpha_estimate = alpha.estimate,
                  z_estimate     = z.est,
                  w_estimate     = w.est,
                  beta           = output$beta,
                  theta          = output$theta,
                  theta_sd       = output$sigma_theta,
+              gamma          = rep(1, nmcmc),
                  alpha          = output$alpha,
                  z              = z.proc,
                  w              = w.proc,
@@ -140,6 +142,13 @@ cat("\n")
                  accept_w       = output$accept_w,
                  accept_z       = output$accept_z)
   class(result) = "lsirm"
+
+  result$call <- match.call()
+  result$method <- "lsirm2pl"
+  result$dtype <- "binary"
+  result$chains <- 1
+  result$varselect <- FALSE
+  result$fixed_gamma <- TRUE
 
   return(result)
 }

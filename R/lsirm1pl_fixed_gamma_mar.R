@@ -50,13 +50,13 @@
 #'
 #' # The code following can achieve the same result.
 #' lsirm_result <- lsirm(data ~ lsirm1pl(spikenslab = FALSE, fixed_gamma = TRUE,
-#' missing_data = "mar", missing.val = 99, fix_theta = FALSE))
+#' missing_data = "mar", missing.val = 99))
 #' }
 #' @export
 lsirm1pl_fixed_gamma_mar = function(data, ndim = 2, niter = 15000, nburn = 2500, nthin = 5, nprint = 500,
                                jump_beta = 0.4, jump_theta = 1.0, jump_z = 0.5, jump_w = 0.5,
                                pr_mean_beta = 0, pr_sd_beta = 1.0, pr_mean_theta = 0, pr_sd_theta = 1.0, pr_a_theta = 0.001, pr_b_theta = 0.001,
-                               missing.val = 99, verbose=FALSE, fix_theta=FALSE){
+                               missing.val = 99, verbose=FALSE, fix_theta_sd=FALSE){
   if(niter < nburn){
     stop("niter must be greater than burn-in process.")
   }
@@ -70,7 +70,7 @@ lsirm1pl_fixed_gamma_mar = function(data, ndim = 2, niter = 15000, nburn = 2500,
   output <- lsirm1pl_fixed_gamma_mar_cpp(data=as.matrix(data), ndim=ndim, niter=niter, nburn=nburn, nthin=nthin, nprint=nprint,
                            jump_beta=jump_theta, jump_theta=jump_theta, jump_z=jump_z, jump_w=jump_w,
                            pr_mean_beta=pr_mean_beta, pr_sd_beta=pr_sd_beta, pr_mean_theta=pr_mean_theta,
-                           pr_sd_theta=pr_sd_theta, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, missing=missing.val, verbose=verbose, fix_theta=fix_theta)
+                           pr_sd_theta=pr_sd_theta, pr_a_theta=pr_a_theta, pr_b_theta=pr_b_theta, missing=missing.val, verbose=verbose, fix_theta_sd=fix_theta_sd)
 
   mcmc.inf = list(nburn=nburn, niter=niter, nthin=nthin)
   nsample <- nrow(data)
@@ -120,7 +120,6 @@ cat("\n")
   # Calculate BIC
   # cat("\n\nCalculate BIC\n")
   missing_est = ifelse(imp.estimate > 0.5, 1, 0)
-  data[data == missing.val] = missing_est
   log_like = log_likelihood_cpp(as.matrix(data), ndim, as.matrix(beta.estimate), as.matrix(theta.estimate), 1, z.est, w.est, missing.val)
   p = nitem + nsample + 1 + ndim * nitem + ndim * nsample
   bic = -2 * log_like[[1]] + p * log(nsample * nitem)
